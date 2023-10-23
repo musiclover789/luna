@@ -8143,3 +8143,6 @@
 2023/10/22 00:08:59 运行可执行文件的路径是: /Users/hongyuji/Documents/workspace/golang/Chromium.app/Contents/MacOS/Chromium
 2023/10/22 00:08:59 临时缓存目录是: /Users/hongyuji/Documents/workspace/golang/cache/chromium_user_data_1697904539470907000
 2023/10/22 00:08:59 选用的临时端口是: 53031
+2023/10/22 03:52:29 运行可执行文件的路径是: /Users/hongyuji/Documents/workspace/golang/Chromium.app/Contents/MacOS/Chromium
+2023/10/22 03:52:29 临时缓存目录是: /Users/hongyuji/Documents/workspace/golang/cache/chromium_user_data_1697917949500717000
+2023/10/22 03:52:29 选用的临时端口是: 54825
