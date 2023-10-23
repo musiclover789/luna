@@ -188,10 +188,10 @@ func TestFingerprint(t *testing.T) {
 
 	//初始化浏览器对象
 	//chromiumPath := "C:\\src\\chromedev\\chromium\\src\\out\\Default/chrome.exe"
-	chromiumPath := "/Users/hongyuji/Documents/workspace/golang/Chromium.app/Contents/MacOS/Chromium"
+	chromiumPath := "/Users/xxxxx/Documents/workspace/golang/Chromium.app/Contents/MacOS/Chromium"
 	browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 		//设置缓存目录,
-		CachePath: luna_utils.CreateCacheDirInSubDir("/Users/hongyuji/Documents/workspace/golang/cache"),
+		CachePath: luna_utils.CreateCacheDirInSubDir("/Users/xxxx/Documents/workspace/golang/cache"),
 		//设置你认为需要的指纹信息
 		Fingerprint: args,
 		//设置非隐身模式

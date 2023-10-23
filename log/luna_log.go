@@ -24,10 +24,13 @@ func init() {
 // 初始化日志器。
 // Parameters:
 //   - logToConsole: Whether to output logs to the console.
+//
 // Return:
 //   - error: An error message. Returns nil if initialization is successful.
+//
 // Parameters:
 //   - logToConsole: 是否将日志输出到控制台。
+//
 // Return:
 //   - error: 错误信息，如果初始化成功则返回 nil。
 func InitLogger(logToConsole bool) error {
@@ -62,6 +65,7 @@ func CloseLogger() {
 // Parameters:
 //   - format: The format string.
 //   - v: The parameter list.
+//
 // Parameters:
 //   - format: 格式化字符串。
 //   - v: 参数列表。
@@ -73,6 +77,7 @@ func Logf(format string, v ...interface{}) {
 // 输出日志。
 // Parameters:
 //   - v: The parameter list.
+//
 // Parameters:
 //   - v: 参数列表。
 func Log(v ...interface{}) {
@@ -83,6 +88,7 @@ func Log(v ...interface{}) {
 // 输出错误日志。
 // Parameters:
 //   - v: The parameter list.
+//
 // Parameters:
 //   - v: 参数列表。
 func LogError(v ...interface{}) {
@@ -97,6 +103,7 @@ func LogError(v ...interface{}) {
 // 输出致命错误日志并退出程序。
 // Parameters:
 //   - v: The parameter list.
+//
 // Parameters:
 //   - v: 参数列表。
 func LogFatal(v ...interface{}) {

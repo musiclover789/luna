@@ -14,9 +14,9 @@ import (
 func TestSelector(t *testing.T) {
 	luna_utils.KillProcess()
 	/********************************/
-	chromiumPath := "/Users/hongyuji/Documents/workspace/golang/Chromium.app/Contents/MacOS/Chromium"
+	chromiumPath := "/Users/xxx/Documents/workspace/golang/Chromium.app/Contents/MacOS/Chromium"
 	browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
-		CachePath: luna_utils.CreateCacheDirInSubDir("/Users/hongyuji/Documents/workspace/golang/cache"),
+		CachePath: luna_utils.CreateCacheDirInSubDir("/Users/xxx/Documents/workspace/golang/cache"),
 		Headless:  false,
 	})
 	//browserObj.DevToolsConn.ShowLogJson(true)
