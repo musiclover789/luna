@@ -139,10 +139,11 @@ func main() {
         // 设置非隐身模式
         Headless: false,
     })
-    // 打开一个页面
+    // 打开一个页面  如果你想看更多示例 请参考文档 https://musiclover789.github.io/lunadocs/docs/category/case
     browserObj.OpenPage("https://www.baidu.com")
     fmt.Println("恭喜你，非常nice的第一个案例")
     time.Sleep(1 * time.Hour)
+
 }
 
 ```
