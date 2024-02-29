@@ -649,7 +649,88 @@ luna_header_1
 ```
 
 
+#### 常见问题回复
 
+1、可以自己随便修改指纹吗？
+
+答：是的
+
+2、目前支持Linux 系统 or 苹果m1,m2芯片吗？
+
+答:暂时不支持、
+
+3、涉及服务器授权吗？
+
+答：否、完全设备授权、离线的授权。
+
+4、有体积更小的浏览器么？
+
+答：无、本身就是抗指纹的，如果精简版 不利于抗指纹。
+
+5、为什么我测试基于视觉时候发现，出现bug
+
+答：下载代码后不要修我的项目名字
+
+6、第三封库可以用的么，如Selenium Pyppeteer Playwright 。
+
+答：可以，但是强烈不建议，因为这样基本上等于阉割了抗指纹的部分核心功能。
+
+7、我没有找到如何类似xpath cssselecter选择器。
+
+答：参考如下代码
+
+```
+var wg sync.WaitGroup // 同步等待
+wg.Add(1)             // 增加等待的数量
+err, p1 := browserObj.OpenPageAndListen("https://www.baidu.com/", func(devToolsConn *protocol.DevToolsConn) {
+    //第一个处理
+    devToolsConn.ShowLog(true)
+    page.PageEnable(devToolsConn)
+    devToolsConn.SubscribeOneTimeEvent("Page.loadEventFired", func(param interface{}) {
+       wg.Done() // 标记回调函数执行完成
+       page.PageDisable(devToolsConn)
+    })
+})
+wg.Wait() // 等待回调函数执行完成
+time.Sleep(3 * time.Second)
+err, x, y := p1.GetElementPositionByCssOnPage(`#browser-new-page`)
+/********************************/
+fmt.Println("测试一下", err, x, y)
+p1.SimulateMouseClickOnPage(x, y)
+for _, pi := range browserObj.GetPages() {
+    browserObj.SwitchPage(pi)
+    fmt.Println(pi.CurrentURL, pi.Title)
+    fmt.Println(">>>>>>>>>>>>")
+}
+```
+
+8、如何操作cookie、文档中我并没有找到
+
+答：参考如下代码
+
+```
+//示例
+var wg sync.WaitGroup // 同步等待
+wg.Add(1)             // 增加等待的数量
+err, p1 := browserObj.OpenPageAndListen("https://www.baidu.com/", func(devToolsConn *protocol.DevToolsConn) {
+   //第一个处理
+   devToolsConn.ShowLogJson(true)
+   network.EnableNetwork(devToolsConn)
+network.RequestResponseAsync(devToolsConn, func(requestId string, request, response map[string]interface{}) {
+            //这里的request & response都是一一对应的请求、header里面的cookie可以自己看一下
+            fmt.Println(luna_utils.FormatJSONAsString(request),luna_utils.FormatJSONAsString(request))
+            平时用不上,并不是每个请求都有请求报体；需要根据请求的url自行判断是否需要使用
+            //network.GetResponseBody(devToolsConn,requestId,time.Minute)
+        })
+})
+
+```
+
+如果设计到启动时候就给固定的登陆cookie、参考
+
+https://musiclover789.github.io/lunadocs/docs/tutorial-extras/case_fingerprint
+
+这篇文章、中的luna_header 部分
 
 
 
