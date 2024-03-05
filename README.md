@@ -771,3 +771,19 @@ fmt.Println(cookies)
 
 
 
+如何上传文件、代码片段
+
+```
+_, p1 := browserObj.OpenPageAndListen("https://graph.baidu.com/pcpage/index?tpl_from=pc", func(devToolsConn *protocol.DevToolsConn) {
+    devToolsConn.ShowLog(false)
+})
+time.Sleep(3 * time.Second)
+//点击文件上传的按钮,示例是Xpath选择器、也支持css选择器
+_, x, y := p1.GetElementPositionByXpathOnPage("//*[@id=\"app\"]/div/div[1]/div[7]/div/span[1]/span[1]")
+input.SimulateMouseClick(p1.DevToolsConn, x, y)
+//获取对应的<input name="file" type="file" >
+//文件css选择器路径 ,注意这里是css选择器,并不是其他的
+seletor := "#app > div > div.page-banner > div.page-search > div > div > div.graph-d20-search-layer-contain > div.graph-d20-search-layer-choose > div > form > input"
+//第一个参数就是css选择器路径,第二个参数是一个数组 存放自己需要上传的本地图片路径
+p1.UploadFiles(seletor, []string{"/Users/hongyuji/Pictures/womama/IMG_2614.JPG"})
+```
