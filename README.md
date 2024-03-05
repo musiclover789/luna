@@ -733,5 +733,41 @@ https://musiclover789.github.io/lunadocs/docs/tutorial-extras/case_fingerprint
 
 这篇文章、中的luna_header 部分
 
+或者您可以参考此代码段
+
+``
+
+```
+_, p1 := browserObj.OpenPageAndListen("https://www.baidu.com/", func(devToolsConn *protocol.DevToolsConn) {
+    devToolsConn.ShowLog(false)
+    //page.PageEnable(devToolsConn) 可用于观察页面加载触发事件对日志,如果检测网络可以network.EnableNetwork(devToolsConn) 配合devToolsConn.ShowLog(true) 使用
+    //第一个处理
+    //设置cookie 以百度举例 此处的url如果设置为https://www.baidu.com 则仅对这个对应的url的cookie 设置值,如果以有值 则覆盖
+    //可以根据你自己的需求,对任何url的cookie进行操作,再次举例 比如 希望对
+    //https://gimg3.baidu.com 进行干预,你也可以写 url 为https://gimg3.baidu.com
+    network.SetCookieByURL(devToolsConn, "luna_url", "luna-cookie", "https://www.baidu.com")
+    //设置cookie,一样对只是换成了 domain 而已 ,相对于domain URL可能控制对更加细腻
+    network.SetCookie(devToolsConn, "luna_domain", "luna-cookie", "www.baidu.com")
+    //至于这里的devToolsConn 可以从任何页面对象获取，也不一定非要写在OpenPageAndListen里面,写外面也可以
+    //用哪个页面的devToolsConn,和对应的 (domain 或url) 则对哪个页面生效
+    /***
+    ClearBrowserCookies
+    */
+    //清空cookie 这个要用在这个地方才可以有效,可以确保页面加载全周期 清空cookie,放在其他地方 就不好说了, 结合具体场景自行考虑使用
+    //network.ClearBrowserCookies(devToolsConn)
+})
+//写在外面的示例
+network.SetCookie(p1.DevToolsConn, "luna_domain_abc", "luna-cookie", "www.baidu.com")
+//如何获取DevToolsConn的示例
+//p1.DevToolsConn
+//browserObj.DevToolsConn
+fmt.Println("打印cookie")
+
+//根据自己的需求,这个地方是一个数组，可以获取任意url的cookie
+urls := []string{"https://www.baidu.com"}
+cookies, _ := network.GetCookies(p1.DevToolsConn, urls)
+fmt.Println(cookies)
+```
+
 
 
