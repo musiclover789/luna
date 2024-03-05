@@ -785,5 +785,5 @@ input.SimulateMouseClick(p1.DevToolsConn, x, y)
 //文件css选择器路径 ,注意这里是css选择器,并不是其他的
 seletor := "#app > div > div.page-banner > div.page-search > div > div > div.graph-d20-search-layer-contain > div.graph-d20-search-layer-choose > div > form > input"
 //第一个参数就是css选择器路径,第二个参数是一个数组 存放自己需要上传的本地图片路径
-p1.UploadFiles(seletor, []string{"/Users/hongyuji/Pictures/womama/IMG_2614.JPG"})
+p1.UploadFiles(seletor, []string{"/Users/Pictures/IMG_2614.JPG"})
 ```
