@@ -8,7 +8,8 @@ import (
 	"time"
 )
 
-/***
+/*
+**
 Network.dataReceived：接收到网络数据时触发的事件。
 Network.eventSourceMessageReceived：接收到EventSource消息时触发的事件。
 Network.loadingFailed：加载失败时触发的事件，比如网络错误或资源无法访问等。
@@ -56,6 +57,71 @@ func NetworkDisable(conn *protocol.DevToolsConn) {
 		"params": map[string]interface{}{},
 	}
 	conn.WriteMessage(req)
+}
+
+// 设置cookie 百度举例 https://www.baidu.com/  baidu.com作为domain 即可
+func SetCookie(conn *protocol.DevToolsConn, key, value, domain string) {
+	req := map[string]interface{}{
+		"id":     luna_utils.IdGen.NextID(),
+		"method": "Network.setCookie",
+		"params": map[string]interface{}{
+			"name":   key,
+			"value":  value,
+			"domain": domain,
+		},
+	}
+	conn.WriteMessage(req)
+}
+
+// 通过url设置cookie 百度举例https://www.baidu.com/, https://www.baidu.com作为url即可
+func SetCookieByURL(conn *protocol.DevToolsConn, key, value, url string) {
+	req := map[string]interface{}{
+		"id":     luna_utils.IdGen.NextID(),
+		"method": "Network.setCookie",
+		"params": map[string]interface{}{
+			"name":  key,
+			"value": value,
+			"url":   url,
+		},
+	}
+	conn.WriteMessage(req)
+}
+
+func ClearBrowserCookies(conn *protocol.DevToolsConn) {
+	req := map[string]interface{}{
+		"id":     luna_utils.IdGen.NextID(),
+		"method": "Network.clearBrowserCookies",
+		"params": map[string]interface{}{},
+	}
+	conn.WriteMessage(req)
+}
+
+func GetCookies(conn *protocol.DevToolsConn, urls []string) (map[string]interface{}, error) {
+	//---
+	id := luna_utils.IdGen.NextID()
+	resultChan := make(chan map[string]interface{}, 1)
+	conn.SubscribeOneTimeEvent(strconv.Itoa(id), func(param interface{}) {
+		if paramMap, ok := param.(map[string]interface{}); ok {
+			resultChan <- paramMap
+		}
+	})
+	req := map[string]interface{}{
+		"id":     id,
+		"method": "Network.getCookies",
+		"params": map[string]interface{}{
+			"urls": urls,
+		},
+	}
+	conn.WriteMessage(req)
+	for {
+		select {
+		case result := <-resultChan:
+			return result, nil
+		case <-time.After(time.Second * 1):
+			return nil, fmt.Errorf("getCookie timeout")
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
 }
 
 func GetResponseBody(conn *protocol.DevToolsConn, requestId string, timeout time.Duration) (map[string]interface{}, error) {
