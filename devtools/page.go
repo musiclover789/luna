@@ -66,6 +66,11 @@ func (p Page) SetHtml(html string) {
 	dom.SetOuterHTML(p.DevToolsConn, nodeId, html)
 }
 
+func (p Page) UploadFiles(selector string, files []string) {
+	nodeId := dom.QuerySelector(p.DevToolsConn, p.GetDocument().Get("result.root.nodeId").Int(), selector).Get("result.nodeId").Int()
+	dom.SetFileInputFiles(p.DevToolsConn, nodeId, files)
+}
+
 //运行js 同步
 
 func (p Page) RunJSSync(js string, timeout time.Duration) (error, gjson.Result) {
@@ -141,7 +146,7 @@ func (p Page) SimilarityWithMargin(smallImgPath string, leftMargin, rightMargin,
 	return input.GetSmallImageCoordinatesWithMargin(p.DevToolsConn, smallImgPath, p.ImgPath, BrowserGlobal.DevicePixelRatio, leftMargin, rightMargin, topMargin, bottomMargin, timeout)
 }
 
-//设置窗口大小
+// 设置窗口大小
 func (p Page) SetViewportSize(width, height int64) {
 	emulation.SetDeviceMetricsOverride(p.DevToolsConn, width, height)
 }
