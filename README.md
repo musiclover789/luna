@@ -766,7 +766,11 @@ fmt.Println("打印cookie")
 //根据自己的需求,这个地方是一个数组，可以获取任意url的cookie
 urls := []string{"https://www.baidu.com"}
 cookies, _ := network.GetCookies(p1.DevToolsConn, urls)
-fmt.Println(cookies)
+//循环打印
+for _, result := range gjson.Parse(luna_utils.FormatJSONAsString(cookies)).Get("result.cookies").Array() {
+    fmt.Println(result.Get("name").String(), result.Get("value").String(), result.Get("domain").String())
+    //可以将以上的cookie存储到数据库,根据你到逻辑
+}
 ```
 
 
