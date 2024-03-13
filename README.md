@@ -107,7 +107,7 @@ user-data-dir=C:\workspace\tempcatch\chromium_user_data_1696987203497907900
 
 Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36
 
-当然这个内容，你自己测试随意修改。
+当然这个内容，你自己测试随意修改。 (未付费用户，其他指纹不会生效)
 
 还记得这个配置文件的命名么？1696987203497907900
 
