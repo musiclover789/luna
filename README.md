@@ -703,7 +703,7 @@ for _, pi := range browserObj.GetPages() {
     fmt.Println(pi.CurrentURL, pi.Title)
     fmt.Println(">>>>>>>>>>>>")
 }
-	/***
+		/***
 	    鼠标移动到指定坐标,
 		p1.SimulateMouseMoveToTarget(endX, endY float64) error
 		鼠标移动到指定元素、动作：会先自动鼠标滚轮到指定元素位置，然后开始移动鼠标，最后返回 元素区域内 随机x，y坐标
@@ -734,6 +734,9 @@ for _, pi := range browserObj.GetPages() {
 		p1.GetPreviousSiblingElementByCss()
 		//父节点
 		p1.GetParentElementByCss()
+		//文档已经存在的,模拟人类点击
+		p1.SimulateMouseClickOnPage(x, y float64)
+		//其他参考文档https://musiclover789.github.io/lunadocs/docs/tutorial-basics/devtools.page
 	*/
 ```
 
