@@ -703,6 +703,38 @@ for _, pi := range browserObj.GetPages() {
     fmt.Println(pi.CurrentURL, pi.Title)
     fmt.Println(">>>>>>>>>>>>")
 }
+	/***
+	    鼠标移动到指定坐标,
+		p1.SimulateMouseMoveToTarget(endX, endY float64) error
+		鼠标移动到指定元素、动作：会先自动鼠标滚轮到指定元素位置，然后开始移动鼠标，最后返回 元素区域内 随机x，y坐标
+		p1.SimulateMouseMoveToElement(selector string) (err error, randomX, randomY float64)
+		鼠标 滚轮 滚动到指定 元素
+	    p1.SimulateScrollToElementBySelector(selector string) error
+		获取当前 选择器 指定 元素，返回如下数据结构元素数据
+		//// Node 表示节点信息的数据结构
+			//type Node struct {
+			//	NodeType      int64
+			//	NodeName      string
+			//	NodeValue     string
+			//	TextContent   string 节点文本数据
+			//	HTMLContent   string 节点html数据
+			//	CSSSelector   string css选择器内容
+			//	XPathSelector string xpath选择器 内容
+			//}
+	    p1.GetElementByCss(selector string) (error, Node)
+		//获取所有字节点 数据
+		p1.GetAllChildElementByCss(selector string) (error, []Node)
+		//获取第一个字节点 对象数据
+		p1.GetFirstChildElementByCss(selector string) (error, Node)
+		//获取最后一个字节点 对象数据
+		p1.GetLastChildElementByCss(selector string) (error, Node)
+		//下一个相邻节点
+		p1.GetNextSiblingElementByCss()
+		//上一个相邻节点
+		p1.GetPreviousSiblingElementByCss()
+		//父节点
+		p1.GetParentElementByCss()
+	*/
 ```
 
 8、如何操作cookie、文档中我并没有找到
