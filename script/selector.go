@@ -95,17 +95,11 @@ function getCssSelector(element) {
     const selectorList = [];
     while (element.parentElement) {
         let selector = element.tagName.toLowerCase();
-        if (element.id) {
-            selector += '#' + element.id;
-            selectorList.unshift(selector);
-            break;
-        } else {
-            let siblings = Array.from(element.parentElement.children);
+        let siblings = Array.from(element.parentElement.children);
             let index = siblings.findIndex(sibling => sibling === element);
             selector += ':nth-child(' + (index + 1) + ')';
             selectorList.unshift(selector);
             element = element.parentElement;
-        }
     }
     return selectorList.join(' > ');
 }
@@ -151,17 +145,11 @@ function getCssSelector(element) {
     const selectorList = [];
     while (element.parentElement) {
         let selector = element.tagName.toLowerCase();
-        if (element.id) {
-            selector += '#' + element.id;
-            selectorList.unshift(selector);
-            break;
-        } else {
-            let siblings = Array.from(element.parentElement.children);
+         let siblings = Array.from(element.parentElement.children);
             let index = siblings.findIndex(sibling => sibling === element);
             selector += ':nth-child(' + (index + 1) + ')';
             selectorList.unshift(selector);
             element = element.parentElement;
-        }
     }
     return selectorList.join(' > ');
 }
@@ -210,17 +198,11 @@ function getCssSelector(element) {
     const selectorList = [];
     while (element.parentElement) {
         let selector = element.tagName.toLowerCase();
-        if (element.id) {
-            selector += '#' + element.id;
-            selectorList.unshift(selector);
-            break;
-        } else {
-            let siblings = Array.from(element.parentElement.children);
+       let siblings = Array.from(element.parentElement.children);
             let index = siblings.findIndex(sibling => sibling === element);
             selector += ':nth-child(' + (index + 1) + ')';
             selectorList.unshift(selector);
             element = element.parentElement;
-        }
     }
     return selectorList.join(' > ');
 }
@@ -272,17 +254,11 @@ function getCssSelector(element) {
     const selectorList = [];
     while (element.parentElement) {
         let selector = element.tagName.toLowerCase();
-        if (element.id) {
-            selector += '#' + element.id;
-            selectorList.unshift(selector);
-            break;
-        } else {
-            let siblings = Array.from(element.parentElement.children);
+       let siblings = Array.from(element.parentElement.children);
             let index = siblings.findIndex(sibling => sibling === element);
             selector += ':nth-child(' + (index + 1) + ')';
             selectorList.unshift(selector);
             element = element.parentElement;
-        }
     }
     return selectorList.join(' > ');
 }
@@ -334,17 +310,11 @@ func JSParentElementByCss(selector string) string {
     const selectorList = [];
     while (element.parentElement) {
         let selector = element.tagName.toLowerCase();
-        if (element.id) {
-            selector += '#' + element.id;
-            selectorList.unshift(selector);
-            break;
-        } else {
-            let siblings = Array.from(element.parentElement.children);
+         let siblings = Array.from(element.parentElement.children);
             let index = siblings.findIndex(sibling => sibling === element);
             selector += ':nth-child(' + (index + 1) + ')';
             selectorList.unshift(selector);
             element = element.parentElement;
-        }
     }
     return selectorList.join(' > ');
 }
@@ -415,17 +385,11 @@ function getCssSelector(element) {
     const selectorList = [];
     while (element.parentElement) {
         let selector = element.tagName.toLowerCase();
-        if (element.id) {
-            selector += '#' + element.id;
-            selectorList.unshift(selector);
-            break;
-        } else {
-            let siblings = Array.from(element.parentElement.children);
+         let siblings = Array.from(element.parentElement.children);
             let index = siblings.findIndex(sibling => sibling === element);
             selector += ':nth-child(' + (index + 1) + ')';
             selectorList.unshift(selector);
             element = element.parentElement;
-        }
     }
     return selectorList.join(' > ');
 }
@@ -470,17 +434,11 @@ function getCssSelector(element) {
     const selectorList = [];
     while (element.parentElement) {
         let selector = element.tagName.toLowerCase();
-        if (element.id) {
-            selector += '#' + element.id;
-            selectorList.unshift(selector);
-            break;
-        } else {
-            let siblings = Array.from(element.parentElement.children);
+        let siblings = Array.from(element.parentElement.children);
             let index = siblings.findIndex(sibling => sibling === element);
             selector += ':nth-child(' + (index + 1) + ')';
             selectorList.unshift(selector);
             element = element.parentElement;
-        }
     }
     return selectorList.join(' > ');
 }
