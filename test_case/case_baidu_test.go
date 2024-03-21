@@ -2,10 +2,10 @@ package test_case
 
 import (
 	"fmt"
-	"luna/base_devtools/input"
-	"luna/base_devtools/page"
-	"luna/base_devtools/runtime"
-	"luna/devtools"
+	"github.com/musiclover789/luna/base_devtools/input"
+	"github.com/musiclover789/luna/base_devtools/page"
+	"github.com/musiclover789/luna/base_devtools/runtime"
+	"github.com/musiclover789/luna/devtools"
 	"luna/luna_utils"
 	"luna/protocol"
 	"luna/script"
