@@ -2,12 +2,12 @@ package test_case
 
 import (
 	"fmt"
-	"luna/base_devtools/network"
-	"luna/base_devtools/page"
-	"luna/base_devtools/runtime"
-	"luna/devtools"
-	"luna/luna_utils"
-	"luna/protocol"
+	"github.com/musiclover789/luna/base_devtools/network"
+	"github.com/musiclover789/luna/base_devtools/page"
+	"github.com/musiclover789/luna/base_devtools/runtime"
+	"github.com/musiclover789/luna/devtools"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 	"sync"
 	"testing"
 	"time"
