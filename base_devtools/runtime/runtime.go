@@ -2,9 +2,9 @@ package runtime
 
 import (
 	"fmt"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 	"github.com/tidwall/gjson"
-	"luna/luna_utils"
-	"luna/protocol"
 	"strconv"
 	"time"
 )
@@ -68,7 +68,7 @@ func EvaluateById(conn *protocol.DevToolsConn, expression string, id int) {
 			"disableBreaks":               false,
 			"replMode":                    false,
 			"allowUnsafeEvalBlockedByCSP": true,
-			//"serializationOptions":        map[string]interface{}{"serialization": "auto"},
+			"serializationOptions":        map[string]interface{}{"serialization": "auto"},
 		},
 	}
 	conn.WriteMessage(req)

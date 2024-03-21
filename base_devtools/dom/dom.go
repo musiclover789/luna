@@ -1,9 +1,10 @@
 package dom
 
 import (
+	"fmt"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 	"github.com/tidwall/gjson"
-	"luna/luna_utils"
-	"luna/protocol"
 	"strconv"
 )
 
@@ -59,6 +60,7 @@ func QuerySelector(conn *protocol.DevToolsConn, nodeId int64, selector string) g
 
 func SetFileInputFiles(conn *protocol.DevToolsConn, nodeId int64, files []string) {
 	id := luna_utils.IdGen.NextID()
+	fmt.Println("关键元素", id, "到底是什么")
 	req := map[string]interface{}{
 		"id":     id,
 		"method": "DOM.setFileInputFiles",

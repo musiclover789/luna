@@ -1,8 +1,8 @@
 package browser
 
 import (
-	"luna/luna_utils"
-	"luna/protocol"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 )
 
 func CloseBrowser(conn *protocol.DevToolsConn) {

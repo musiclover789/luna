@@ -3,12 +3,12 @@ package page
 import (
 	"encoding/base64"
 	"fmt"
+	"github.com/musiclover789/luna/base_devtools/runtime"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
+	"github.com/musiclover789/luna/script"
 	"github.com/tidwall/gjson"
 	"io/ioutil"
-	"luna/base_devtools/runtime"
-	"luna/luna_utils"
-	"luna/protocol"
-	"luna/script"
 	"strconv"
 	"strings"
 	"time"
@@ -222,8 +222,8 @@ func CaptureTestRetry(conn *protocol.DevToolsConn, path string, timeout time.Dur
 		fmt.Printf("截图保存失败 执行耗时：%d 毫秒\n", elapsed)
 		return err
 	}
-	elapsed := time.Since(start).Milliseconds()
-	fmt.Printf("截图成功 执行耗时：%d 毫秒\n", elapsed)
+	//elapsed := time.Since(start).Milliseconds()
+	//fmt.Printf("截图成功 执行耗时：%d 毫秒\n", elapsed)
 	return nil
 }
 
@@ -267,7 +267,6 @@ func ReloadPage(conn *protocol.DevToolsConn, ignoreCache bool, scriptToEvaluateO
 	conn.WriteMessage(req)
 }
 
-//
 func PageEnable(conn *protocol.DevToolsConn) {
 	req := map[string]interface{}{
 		"id":     luna_utils.IdGen.NextID(),

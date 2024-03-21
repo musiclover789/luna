@@ -2,8 +2,8 @@ package input
 
 import (
 	"fmt"
+	"github.com/musiclover789/luna/luna_utils"
 	"github.com/tidwall/gjson"
-	"luna/luna_utils"
 	"math/rand"
 	"time"
 )
@@ -29,10 +29,9 @@ type TargetCoordinates struct {
 }
 
 type TargetCoordinatesItem struct {
-	SmallImgPath  string //小图的路径
-	MatchScore float64
+	SmallImgPath string //小图的路径
+	MatchScore   float64
 }
-
 
 type ImageCoordinates struct {
 	Err         error
@@ -48,7 +47,7 @@ func position(executablePath, bigImgPath, smallImgPath, testImgPath string, left
 	if err != nil {
 		return err, 0, 0, 0, 0, 0
 	}
-	fmt.Println("匹配输出:", jsonData)
+	//fmt.Println("匹配输出:", jsonData)
 	result := gjson.Parse(jsonData)
 	if result.Get("result").Exists() && result.Get("result").String() == "no match" {
 		return fmt.Errorf("匹配不到图片,请观察相似度是否太低,或者coefficient系数错误"), 0, 0, 0, 0, result.Get("matchScore").Float()
@@ -66,11 +65,11 @@ func position(executablePath, bigImgPath, smallImgPath, testImgPath string, left
 	randomX := randomBetween(topLeftX+(leftMargin), topRightX-(rightMargin))
 	randomY := randomBetween(topRightY+(topMargin), bottomRightY-(bottomMargin))
 
-	fmt.Println("计算结果:")
+	//fmt.Println("计算结果:")
 	ImageWidth := result.Get("ImageWidth").Int()
 	ImageHeight := result.Get("ImageHeight").Int()
 	matchScore := result.Get("matchScore").Float()
-	fmt.Println("随机坐标点:", randomX, randomY, "图片大小:", ImageWidth, ImageHeight, "匹配相似度:", matchScore)
+	//fmt.Println("随机坐标点:", randomX, randomY, "图片大小:", ImageWidth, ImageHeight, "匹配相似度:", matchScore)
 	return nil, randomX, randomY, ImageWidth, ImageHeight, matchScore
 }
 

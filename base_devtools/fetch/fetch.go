@@ -1,8 +1,8 @@
 package fetch
 
 import (
-	"luna/luna_utils"
-	"luna/protocol"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 )
 
 func GetResponseBody(conn *protocol.DevToolsConn, requestId string) {
@@ -15,4 +15,3 @@ func GetResponseBody(conn *protocol.DevToolsConn, requestId string) {
 	}
 	conn.WriteMessage(req)
 }
-

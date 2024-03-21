@@ -1,11 +1,12 @@
 package input
 
 import (
+	"encoding/base64"
 	"fmt"
 	"github.com/mozillazg/go-pinyin"
-	"luna/base_devtools/page"
-	"luna/luna_utils"
-	"luna/protocol"
+	"github.com/musiclover789/luna/base_devtools/page"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 	"math"
 	"os"
 	"path/filepath"
@@ -65,7 +66,8 @@ func WaitForMatchSync(conn *protocol.DevToolsConn, smallImgPath, imgCachePath st
 	return nil, false
 }
 
-/**
+/*
+*
 在给定时间内返回当前页面的截图&小图的匹配度\和对应的点击区域坐标
 */
 func GetSmallImageCoordinates(conn *protocol.DevToolsConn, smallImgPath, imgCachePath string, coefficient float64, timeout time.Duration) (error, *ImageCoordinates) {
@@ -250,7 +252,7 @@ func ScrollMouseToTargetImage(conn *protocol.DevToolsConn, x, y float64, totalDi
 
 }
 
-//滚动
+// 滚动
 func SimulateMouseScroll(conn *protocol.DevToolsConn, x, y float64, totalDistance int, direction Direction) {
 	var points []ScrollPoint
 	switch direction {
@@ -287,7 +289,7 @@ func SimulateMouseScroll(conn *protocol.DevToolsConn, x, y float64, totalDistanc
 	}
 }
 
-//移动
+// 移动
 func SimulateMoveMouse(conn *protocol.DevToolsConn, startX, startY, endX, endY float64) {
 	targetSize := luna_utils.RandomInRange(1, 100)
 	// Calculate the Fitts' Law index of difficulty
@@ -340,7 +342,7 @@ func SimulateMoveMouse(conn *protocol.DevToolsConn, startX, startY, endX, endY f
 
 }
 
-//键盘
+// 键盘
 func SimulateKeyboardInput(conn *protocol.DevToolsConn, text string) {
 	a := pinyin.NewArgs()
 	a.Fallback = func(r rune, a pinyin.Args) []string {
@@ -403,7 +405,7 @@ func SimulateKeyboardInput(conn *protocol.DevToolsConn, text string) {
 	}
 }
 
-var  exeablePath string
+var exeablePath string
 
 func init() {
 	lunaDir, err := findLunaDirectory()
@@ -415,13 +417,13 @@ func init() {
 	switch os_item := runtime.GOOS; os_item {
 	case "windows":
 		fmt.Println("您的操作系统  Windows")
-		exeablePath = filepath.Join(lunaDir, "devtools", "luna_lib","win_x64", "img_win_x86_64.exe")
+		exeablePath = filepath.Join(lunaDir, "devtools", "luna_lib", "win_x64", "img_win_x86_64.exe")
 	case "linux":
 		fmt.Println("您的操作系统  Linux")
-		exeablePath = filepath.Join( lunaDir,"devtools", "luna_lib", "img_mac_arm_01")
+		exeablePath = filepath.Join(lunaDir, "devtools", "luna_lib", "img_mac_arm_01")
 	case "darwin":
 		fmt.Println("您的操作系统  Mac OS")
-		exeablePath = filepath.Join( lunaDir,"devtools", "luna_lib","mac_arm", "img_mac_arm_01")
+		exeablePath = filepath.Join(lunaDir, "devtools", "luna_lib", "mac_arm", "img_mac_arm_01")
 	default:
 		fmt.Printf("Unknown OS: %v\n", os_item)
 		os.Exit(1)
@@ -455,7 +457,7 @@ func findLunaDirectory() (string, error) {
 
 func getTargetCoordinates(params *TargetCoordinates) *ImageCoordinates {
 	executablePath := exeablePath
-	fmt.Println("定位坐标的程序位置:", executablePath)
+	//fmt.Println("定位坐标的程序位置:", executablePath)
 	err, randomX, randomY, imageWidth, imageHeight, matchScore := position(executablePath, params.BigImgPath, params.SmallImgPath, params.TestImgPath, params.LeftMargin, params.RightMargin, params.TopMargin, params.BottomMargin, params.LunaThreshold, params.Coefficient)
 	return &ImageCoordinates{
 		Err:         err,
@@ -465,4 +467,47 @@ func getTargetCoordinates(params *TargetCoordinates) *ImageCoordinates {
 		ImageHeight: imageHeight,
 		MatchScore:  matchScore,
 	}
+}
+
+func SetInterceptDrags(conn *protocol.DevToolsConn) {
+	id := luna_utils.IdGen.NextID()
+	// 发送拖拽事件
+	params := map[string]interface{}{
+		"enabled": true,
+	}
+	req := map[string]interface{}{
+		"id":     id,
+		"method": "Input.setInterceptDrags",
+		"params": params,
+	}
+	conn.WriteMessage(req)
+}
+
+func DispatchDragEvent(conn *protocol.DevToolsConn, x, y int, event string) {
+	id := luna_utils.IdGen.NextID()
+	// 创建拖拽事件参数
+	dragData := map[string]interface{}{
+		"items": []interface{}{
+			map[string]interface{}{
+				"mimeType": "image/jpeg",                                                                              // 指定图片类型
+				"data":     base64.StdEncoding.EncodeToString([]byte{0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A}), // 你的图片数据
+			},
+		},
+		"files":              []string{"/Users/hongyuji/Pictures/hxx/IMG_2545.JPG"}, // 指定文件路径
+		"dragOperationsMask": 1,                                                     // 设置允许的拖拽操作
+	}
+
+	// 发送拖拽事件
+	params := map[string]interface{}{
+		"type": event,
+		"x":    x,
+		"y":    y,
+		"data": dragData,
+	}
+	req := map[string]interface{}{
+		"id":     id,
+		"method": "Input.dispatchDragEvent",
+		"params": params,
+	}
+	conn.WriteMessage(req)
 }

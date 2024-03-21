@@ -1,9 +1,9 @@
 package emulation
 
 import (
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 	"github.com/tidwall/gjson"
-	"luna/luna_utils"
-	"luna/protocol"
 	"strconv"
 )
 

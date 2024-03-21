@@ -1,8 +1,8 @@
 package input
 
 import (
-	"luna/luna_utils"
-	"luna/protocol"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 )
 
 const (
@@ -55,9 +55,9 @@ func mouseWheel(conn *protocol.DevToolsConn, x, y float64, deltaX, deltaY int) {
 		"deltaX": deltaX,
 		"deltaY": deltaY,
 	}
-	id:=luna_utils.IdGen.NextID()
+	id := luna_utils.IdGen.NextID()
 	req := map[string]interface{}{
-		"id":  id   ,
+		"id":     id,
 		"method": "Input.dispatchMouseEvent",
 		"params": params,
 	}

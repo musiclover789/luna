@@ -2,13 +2,13 @@ package devtools
 
 import (
 	"fmt"
+	"github.com/musiclover789/luna/base_devtools/dom"
+	"github.com/musiclover789/luna/base_devtools/emulation"
+	"github.com/musiclover789/luna/base_devtools/input"
+	"github.com/musiclover789/luna/base_devtools/runtime"
+	"github.com/musiclover789/luna/protocol"
+	"github.com/musiclover789/luna/script"
 	"github.com/tidwall/gjson"
-	"luna/base_devtools/dom"
-	"luna/base_devtools/emulation"
-	"luna/base_devtools/input"
-	"luna/base_devtools/runtime"
-	"luna/protocol"
-	"luna/script"
 	"math"
 	"math/rand"
 	"time"
@@ -511,4 +511,17 @@ func getRandomPoint(top, left, width, height float64) (float64, float64) {
 	y := rand.Float64()*(bottom-top) + top
 
 	return x, y
+}
+
+func (p Page) GetCurrentURL() (error, string) {
+	err, result := p.RunJSSync("window.location.href;", time.Minute)
+	if err == nil {
+		result := result.Get("result.result.value")
+		if !result.Exists() {
+			return fmt.Errorf("未找到元素"), ""
+		}
+		return nil, result.String()
+
+	}
+	return fmt.Errorf("未找到元素"), ""
 }

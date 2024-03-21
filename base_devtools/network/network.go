@@ -2,8 +2,8 @@ package network
 
 import (
 	"fmt"
-	"luna/luna_utils"
-	"luna/protocol"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 	"strconv"
 	"time"
 )

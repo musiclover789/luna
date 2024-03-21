@@ -2,12 +2,12 @@ package devtools
 
 import (
 	"fmt"
+	"github.com/musiclover789/luna/base_devtools/browser"
+	"github.com/musiclover789/luna/base_devtools/page"
+	"github.com/musiclover789/luna/base_devtools/target"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
 	"github.com/tidwall/gjson"
-	"luna/base_devtools/browser"
-	"luna/base_devtools/page"
-	"luna/base_devtools/target"
-	"luna/luna_utils"
-	"luna/protocol"
 	"sync"
 )
 
@@ -36,14 +36,14 @@ type Browser struct {
 
 func initBrowser(chromiumPath string, options *BrowserOptions) int {
 	if options != nil {
-		return luna_utils.StartChromiumWithUserDataDir(chromiumPath, options.CachePath, &options.ProxyStr, options.Headless, func() (bool,int, int) {
-			if options.WindowSize==nil{
-				return false,0,0
+		return luna_utils.StartChromiumWithUserDataDir(chromiumPath, options.CachePath, &options.ProxyStr, options.Headless, func() (bool, int, int) {
+			if options.WindowSize == nil {
+				return false, 0, 0
 			}
-			return true,options.WindowSize.Width, options.WindowSize.Height
+			return true, options.WindowSize.Width, options.WindowSize.Height
 		}, options.Fingerprint[:]...)
 	} else {
-		return luna_utils.StartChromiumWithUserDataDir(chromiumPath, "",nil, false, nil)
+		return luna_utils.StartChromiumWithUserDataDir(chromiumPath, "", nil, false, nil)
 	}
 	return 0
 }
@@ -55,8 +55,8 @@ func NewBrowser(chromiumPath string, options *BrowserOptions) *Browser {
 		panic("NewBrowser异常-获取不到正确到端口")
 	}
 	_, firstConn := droot.FirstConn()
-	imgPath:=""
-	if options!=nil{
+	imgPath := ""
+	if options != nil {
 		imgPath = options.ImgPath
 	}
 	return &Browser{
@@ -144,8 +144,8 @@ func (browser *Browser) GetPages() []*Page {
 		for _, po := range browser.Pages {
 			//说明这个页面还建在
 			if er.ID == po.PageID {
-				po.CurrentURL=er.URL
-				po.Title=er.Title
+				po.CurrentURL = er.URL
+				po.Title = er.Title
 				bl = false
 			}
 		}
