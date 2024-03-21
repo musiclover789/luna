@@ -2,7 +2,7 @@ package test_case
 
 import (
 	"fmt"
-	"luna/devtools"
+	"github.com/musiclover789/luna/devtools"
 	"testing"
 	"time"
 )
