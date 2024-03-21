@@ -2,14 +2,13 @@ package luna_utils
 
 import (
 	"fmt"
-	"luna/log"
-	"luna/reverse_proxy"
+	"github.com/musiclover789/luna/log"
+	"github.com/musiclover789/luna/reverse_proxy"
 	"net"
 	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -75,10 +74,6 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 		chromiumCmdArgs = append(chromiumCmdArgs, "--user-data-dir="+userDataDirFullPath)
 	}
 	fmt.Println(chromiumCmdArgs)
-	switch os_item := runtime.GOOS; os_item {
-	case "windows":
-		writeToLogFile("C:\\luna-temp", chromiumCmdArgs)
-	}
 
 	chromiumCmd := exec.Command(chromiumPath, chromiumCmdArgs...)
 
@@ -94,37 +89,6 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 	}
 
 	return port
-}
-
-func writeToLogFile(filePath string, customArgs []string) error {
-
-	// 获取当前毫秒数
-	milliseconds := time.Now().UnixNano() / int64(time.Millisecond)
-	// 将毫秒数转换为字符串
-	fileName := fmt.Sprintf("%010d", milliseconds)
-	// 创建文件并打开
-	fullPath := filepath.Join(filePath, fileName)
-	// 创建文件
-	file, err := os.Create(fullPath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	// 遍历参数数组，写入每个参数
-	for _, arg := range customArgs {
-		// 去掉参数开头的"--"并进行trim
-		line := strings.TrimPrefix(arg, "--")
-		line = strings.TrimSpace(line)
-
-		// 将处理后的参数写入文件
-		_, err := file.WriteString(line + "\n")
-		if err != nil {
-			return err
-		}
-	}
-
-	return nil
 }
 
 var CreateCacheDirInSubDir = func(basePath string) string {

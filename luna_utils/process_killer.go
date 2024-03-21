@@ -2,7 +2,7 @@ package luna_utils
 
 import (
 	"fmt"
-	luna_log "luna/log"
+	luna_log "github.com/musiclover789/luna/log"
 	"os"
 	"os/exec"
 	"runtime"

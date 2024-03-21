@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/websocket"
-	"luna/log"
-	"luna/luna_utils"
+	"github.com/musiclover789/luna/log"
+	"github.com/musiclover789/luna/luna_utils"
 	"math"
 	"strconv"
 	"time"
@@ -28,7 +28,7 @@ type DevToolsConn struct {
 
 func CreteDevToolsConn(devtoolsURL string) (error, *DevToolsConn) {
 	dialer := websocket.DefaultDialer
-	dialer.WriteBufferSize =  math.MaxInt32 // 设置写入缓冲区大小为 1024 字节
+	dialer.WriteBufferSize = math.MaxInt32 // 设置写入缓冲区大小为 1024 字节
 	//dialer.ReadBufferSize = 512
 	conn, _, err := dialer.Dial(devtoolsURL, nil)
 
