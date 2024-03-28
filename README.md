@@ -739,6 +739,8 @@ for _, pi := range browserObj.GetPages() {
 		p1.GetParentElementByCss()
 		//文档已经存在的,模拟人类点击
 		p1.SimulateMouseClickOnPage(x, y float64)
+		//拖动
+		//p1.SimulateDrag(startX, startY, endX, endY float64)
 		//其他参考文档https://musiclover789.github.io/lunadocs/docs/tutorial-basics/devtools.page
 	*/
 ```
