@@ -96,6 +96,16 @@ func (p Page) SimulateMouseMoveOnPage(startX, startY, endX, endY float64) {
 	p.DevToolsConn.ReduceSpeed(speed)
 }
 
+/*
+**
+模拟拖拽
+*/
+func (p Page) SimulateDrag(startX, startY, endX, endY float64) {
+	input.SimulateMousePressed(p.DevToolsConn, startX, startY)
+	input.SimulateMoveMouse(p.DevToolsConn, startX, startY, endX, endY)
+	input.SimulateMouseReleased(p.DevToolsConn, endX, endY)
+}
+
 //鼠标移动 //从当前鼠标所在位置 移动到目标位置
 
 func (p Page) SimulateMouseMoveToTarget(endX, endY float64) error {
@@ -153,6 +163,7 @@ func (p Page) SimulateMouseMoveToElement(selector string) (err error, randomX, r
 */
 
 func (p Page) SimulateMouseClickOnPage(x, y float64) {
+
 	input.SimulateMouseClick(p.DevToolsConn, x, y)
 }
 
@@ -258,7 +269,12 @@ func (p Page) SimilarityWithMargin(smallImgPath string, leftMargin, rightMargin,
 
 // 设置窗口大小
 func (p Page) SetViewportSize(width, height int64) {
-	emulation.SetDeviceMetricsOverride(p.DevToolsConn, width, height)
+	emulation.SetDeviceMetricsOverride(p.DevToolsConn, width, height, 0)
+}
+
+// 设置窗口大小
+func (p Page) SetViewportSizeAndScale(width, height, scale int64) {
+	emulation.SetDeviceMetricsOverride(p.DevToolsConn, width, height, scale)
 }
 
 /*
