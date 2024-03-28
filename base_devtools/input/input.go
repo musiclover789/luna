@@ -166,6 +166,28 @@ func SimulateMouseClick(conn *protocol.DevToolsConn, x, y float64) {
 	dispatchMouseEvent(conn, params)
 }
 
+func SimulateMousePressed(conn *protocol.DevToolsConn, x, y float64) {
+	params := mouseEventParams{
+		Type:       "mousePressed",
+		Button:     MouseButtonLeft,
+		ClickCount: 1,
+		X:          x,
+		Y:          y,
+	}
+	dispatchMouseEvent(conn, params)
+}
+
+func SimulateMouseReleased(conn *protocol.DevToolsConn, x, y float64) {
+	params := mouseEventParams{
+		Type:       "mouseReleased",
+		Button:     MouseButtonLeft,
+		ClickCount: 1,
+		X:          x,
+		Y:          y,
+	}
+	dispatchMouseEvent(conn, params)
+}
+
 func ScrollMouseToTargetImage(conn *protocol.DevToolsConn, x, y float64, totalDistance int, direction Direction, smallImgPath, imgCachePath string, coefficient, matchScore float64, timeout time.Duration) (error, bool) {
 	start := time.Now() // Record start time
 
