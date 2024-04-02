@@ -7,7 +7,9 @@ import (
 	"github.com/musiclover789/luna/base_devtools/target"
 	"github.com/musiclover789/luna/luna_utils"
 	"github.com/musiclover789/luna/protocol"
+	"github.com/musiclover789/luna/reverse_proxy"
 	"github.com/tidwall/gjson"
+	"log"
 	"sync"
 )
 
@@ -30,11 +32,12 @@ type Browser struct {
 	First           bool //是不是第一次打开窗口
 	mu              sync.Mutex
 	Pages           []*Page
-	ImgPath         string //存放目标图片的基础目录
+	ImgPath         string                     //存放目标图片的基础目录
+	Proxy           *reverse_proxy.ProxyServer //proxy对象
 
 }
 
-func initBrowser(chromiumPath string, options *BrowserOptions) int {
+func initBrowser(chromiumPath string, options *BrowserOptions) (int, *reverse_proxy.ProxyServer) {
 	if options != nil {
 		return luna_utils.StartChromiumWithUserDataDir(chromiumPath, options.CachePath, &options.ProxyStr, options.Headless, func() (bool, int, int) {
 			if options.WindowSize == nil {
@@ -45,11 +48,11 @@ func initBrowser(chromiumPath string, options *BrowserOptions) int {
 	} else {
 		return luna_utils.StartChromiumWithUserDataDir(chromiumPath, "", nil, false, nil)
 	}
-	return 0
+	return 0, nil
 }
 
 func NewBrowser(chromiumPath string, options *BrowserOptions) *Browser {
-	port := initBrowser(chromiumPath, options)
+	port, proxy := initBrowser(chromiumPath, options)
 	droot := protocol.NewDevtoolsRoot(port)
 	if port == 0 {
 		panic("NewBrowser异常-获取不到正确到端口")
@@ -66,6 +69,7 @@ func NewBrowser(chromiumPath string, options *BrowserOptions) *Browser {
 		First:           true,
 		DevToolsConn:    firstConn,
 		ImgPath:         imgPath,
+		Proxy:           proxy,
 	}
 }
 
@@ -179,5 +183,12 @@ func (b *Browser) Close() {
 	//for _, p := range b.GetPages() {
 	//	p.Close()
 	//}
+	proxy := b.Proxy
+	if proxy != nil {
+		// 停止代理服务器
+		if err := proxy.Stop(); err != nil {
+			log.Fatalf("Failed to stop proxy server: %v", err)
+		}
+	}
 	browser.CloseBrowser(b.DevToolsConn)
 }
