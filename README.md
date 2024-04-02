@@ -122,6 +122,9 @@ Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrom
 
 ## 快速入门
 
+引入包:     go get -u github.com/musiclover789/luna
+###### 如果您执行到这一步遇到依赖包问题，那么请执行 go get -v -d ./... 命令即可。
+
 ```bash
 package main
 
@@ -151,7 +154,7 @@ func main() {
 
 
 
-###### 如果您执行到这一步遇到依赖包问题，那么请执行 go get -v -d ./... 命令即可。
+
 
 
 
