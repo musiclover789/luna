@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/musiclover789/luna/log"
 	"github.com/musiclover789/luna/reverse_proxy"
+	"log"
 	"net"
 	"net/url"
 	"os"
@@ -16,18 +17,18 @@ import (
 
 //--window-size=800,600
 
-var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string, proxy *string, isHeadless bool, size func() (bool, int, int), customArgs ...string) int {
+var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string, proxy *string, isHeadless bool, size func() (bool, int, int), customArgs ...string) (int, *reverse_proxy.ProxyServer) {
 	// 获取随机端口
 	port, err := getRandomPort()
 	if err != nil {
 		luna_log.LogError("failed to get random port: %v\n", err)
-		return -1
+		return -1, nil
 	}
 
 	// 检查端口是否被占用
 	if isPortOpen(port) {
 		luna_log.LogError("port %d is already in use\n", port)
-		return -1
+		return -1, nil
 	}
 
 	luna_log.Log("运行可执行文件的路径是:", chromiumPath)
@@ -54,18 +55,28 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 	}
 
 	chromiumCmdArgs = append(chromiumCmdArgs, "--remote-debugging-port="+strconv.Itoa(port))
+	var proxyServer *reverse_proxy.ProxyServer
 	if proxy != nil && len(*proxy) > 0 {
 		proxyURL, err := url.Parse(*proxy)
 		if err != nil {
 			luna_log.LogError("Failed to parse proxy URL: %v", err)
-			return -1
+			return -1, nil
 		}
 		pwd, _ := proxyURL.User.Password()
 
-		proxy_port, err := reverse_proxy.StartProxyServer(proxyURL.Scheme, proxyURL.Hostname(), proxyURL.Port(), proxyURL.User.Username(), pwd)
+		// 创建一个代理服务器实例
+		proxyServer = reverse_proxy.NewProxyServer(proxyURL.Scheme, proxyURL.Hostname(), proxyURL.Port(), proxyURL.User.Username(), pwd)
+
+		// 启动代理服务器
+		proxy_port, err := proxyServer.Start()
+		if err != nil {
+			log.Fatalf("Failed to start proxy server: %v", err)
+		}
+		log.Printf("Proxy server started on port %s", port)
+
 		if err != nil {
 			luna_log.LogError("Failed to start proxy server: %v", err)
-			return -1
+			return -1, nil
 		}
 		chromiumCmdArgs = append(chromiumCmdArgs, "--proxy-server=127.0.0.1:"+proxy_port)
 	}
@@ -80,15 +91,15 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 	err = chromiumCmd.Start()
 	if err != nil {
 		luna_log.LogError("Failed to start process: %v\n", err)
-		return -1
+		return -1, nil
 	}
 
 	if chromiumCmd.ProcessState != nil && chromiumCmd.ProcessState.Exited() {
 		luna_log.LogError("Failed to start process, exit code %d\n", chromiumCmd.ProcessState.ExitCode())
-		return -1
+		return -1, nil
 	}
 
-	return port
+	return port, proxyServer
 }
 
 var CreateCacheDirInSubDir = func(basePath string) string {
