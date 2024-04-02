@@ -9,7 +9,6 @@ import (
 	"github.com/musiclover789/luna/protocol"
 	"github.com/musiclover789/luna/reverse_proxy"
 	"github.com/tidwall/gjson"
-	"log"
 	"sync"
 )
 
@@ -187,7 +186,7 @@ func (b *Browser) Close() {
 	if proxy != nil {
 		// 停止代理服务器
 		if err := proxy.Stop(); err != nil {
-			log.Fatalf("Failed to stop proxy server: %v", err)
+			fmt.Println("Failed to stop proxy server:", err.Error())
 		}
 	}
 	browser.CloseBrowser(b.DevToolsConn)
