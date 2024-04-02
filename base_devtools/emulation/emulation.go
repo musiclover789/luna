@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func SetDeviceMetricsOverride(conn *protocol.DevToolsConn, width, height int64) gjson.Result {
+func SetDeviceMetricsOverride(conn *protocol.DevToolsConn, width, height, scale int64) gjson.Result {
 	id := luna_utils.IdGen.NextID()
 	req := map[string]interface{}{
 		"id":     id,
@@ -15,7 +15,8 @@ func SetDeviceMetricsOverride(conn *protocol.DevToolsConn, width, height int64) 
 		"params": map[string]interface{}{
 			"width":             width,
 			"height":            height,
-			"deviceScaleFactor": 0,
+			"deviceScaleFactor": scale,
+			"scale":             scale,
 			"mobile":            false,
 		},
 	}
