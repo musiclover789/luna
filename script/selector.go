@@ -119,7 +119,7 @@ function getFirstChildNodeInfo(selector) {
                 nodeName: firstChildNode.nodeName,
                 nodeValue: firstChildNode.nodeValue,
                 textContent: firstChildNode.textContent,
-                htmlContent: firstChildNode.innerHTML,
+                htmlContent: firstChildNode.outerHTML,
                 cssSelector: getCssSelector(firstChildNode),
                 xpathSelector: getXpathSelector(firstChildNode)
             };
@@ -169,7 +169,7 @@ function getLastChildNodeInfo(selector) {
                 nodeName: lastChildNode.nodeName,
                 nodeValue: lastChildNode.nodeValue,
                 textContent: lastChildNode.textContent,
-                htmlContent: lastChildNode.innerHTML,
+                htmlContent: lastChildNode.outerHTML,
                 cssSelector: getCssSelector(lastChildNode),
                 xpathSelector: getXpathSelector(lastChildNode)
             };
@@ -224,7 +224,7 @@ function getNextSiblingNodeInfo(selector) {
                 nodeName: nextSiblingNode.nodeName,
                 nodeValue: nextSiblingNode.nodeValue,
                 textContent: nextSiblingNode.textContent,
-                htmlContent: nextSiblingNode.innerHTML,
+                htmlContent: nextSiblingNode.outerHTML,
                 cssSelector: getCssSelector(nextSiblingNode),
                 xpathSelector: getXpathSelector(nextSiblingNode)
             };
@@ -280,7 +280,7 @@ function getPreviousSiblingNodeInfo(selector) {
                 nodeName: previousSiblingNode.nodeName,
                 nodeValue: previousSiblingNode.nodeValue,
                 textContent: previousSiblingNode.textContent,
-                htmlContent: previousSiblingNode.innerHTML,
+                htmlContent: previousSiblingNode.outerHTML,
                 cssSelector: getCssSelector(previousSiblingNode),
                 xpathSelector: getXpathSelector(previousSiblingNode)
             };
@@ -336,7 +336,7 @@ function getParentNodeInfo(selector) {
                 nodeName: parentNode.nodeName,
                 nodeValue: parentNode.nodeValue,
                 textContent: parentNode.textContent,
-                htmlContent: parentNode.innerHTML,
+                htmlContent: parentNode.outerHTML,
                 cssSelector: getCssSelector(parentNode),
                 xpathSelector: getXpathSelector(parentNode)
             };
@@ -369,7 +369,7 @@ function getNodeInfo(selector) {
             nodeName: element.nodeName,
             nodeValue: element.nodeValue,
             textContent: element.textContent,
-            htmlContent: element.innerHTML,
+            htmlContent: element.outerHTML,
             cssSelector: getCssSelector(element),
             xpathSelector: getXpathSelector(element)
         };
@@ -422,7 +422,7 @@ function getNodeInfo(node) {
         nodeName: node.nodeName,
         nodeValue: node.nodeValue,
         textContent: node.textContent,
-        htmlContent: node.innerHTML,
+        htmlContent: node.outerHTML,
         cssSelector: getCssSelector(node),
         xpathSelector: getXpathSelector(node)
     };
