@@ -20,7 +20,7 @@ func TestProxy(t *testing.T) {
 
 	//初始化浏览器对象
 	chromiumPath := "/Users/hongyuji/Documents/workspace/golang/Chromium.app/Contents/MacOS/Chromium"
-	browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+	_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 		//设置缓存目录,
 		CachePath: luna_utils.CreateCacheDirInSubDir("/Users/hongyuji/Documents/workspace/golang/cache"),
 		//设置你的代理IP、他支持所有主流的种类https http socks5 有无密码均支持、白名的模式也支持、
