@@ -24,7 +24,7 @@ func TestDouyin(t *testing.T) {
 	luna_utils.KillProcess()
 	/********************************/
 	chromiumPath := "/Users/hongyuji/Documents/workspace/golang/Chromium.app/Contents/MacOS/Chromium"
-	browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+	_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 		CachePath: luna_utils.CreateCacheDirInSubDir("/Users/hongyuji/Documents/workspace/golang/cache"),
 		Headless:  false,
 	})
