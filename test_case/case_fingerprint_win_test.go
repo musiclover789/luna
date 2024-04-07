@@ -190,7 +190,7 @@ func TestFingerprintWin(t *testing.T) {
 
 	//初始化浏览器对象
 	chromiumPath := "C:\\src\\chromedev\\chromium\\src\\out\\Default/chrome.exe"
-	browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+	_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 		//设置缓存目录,
 		CachePath: luna_utils.CreateCacheDirInSubDir("C:\\workspace\\tempcatch"),
 		//设置你认为需要的指纹信息
