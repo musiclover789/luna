@@ -11,6 +11,9 @@ func NewDevtoolsRoot(port int) *DevtoolsRoot {
 }
 
 func (devtoolsRoot *DevtoolsRoot) FirstConn() (error, *DevToolsConn) {
-	webSocketDebuggerUrl := *GetDefaultWebSocketDebuggerUrl(devtoolsRoot.Port)
-	return CreteDevToolsConn(webSocketDebuggerUrl)
+	webSocketDebuggerUrl, err := GetDefaultWebSocketDebuggerUrl(devtoolsRoot.Port)
+	if err != nil {
+		return err, nil
+	}
+	return CreteDevToolsConn(*webSocketDebuggerUrl)
 }
