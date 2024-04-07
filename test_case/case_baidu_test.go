@@ -23,7 +23,7 @@ func TestBaidu(t *testing.T) {
 	/********************************/
 	//chromiumPath := "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
 	chromiumPath := "C:\\src\\chromedev\\chromium\\src\\out\\Default/chrome.exe"
-	browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+	_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 		CachePath: luna_utils.CreateCacheDirInSubDir("C:\\workspace\\tempcatch"),
 		ImgPath:   "C:\\workspace\\v2\\v2\\luna/test_img/baidu_img",
 		Headless:  false,
