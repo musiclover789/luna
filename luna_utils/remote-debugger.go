@@ -70,7 +70,7 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 		// 启动代理服务器
 		proxy_port, err := proxyServer.Start()
 		if err != nil {
-			log.Fatalf("Failed to start proxy server: %v", err)
+			luna_log.LogError("Failed to start proxy server: %v", err)
 		}
 		log.Printf("Proxy server started on port %s", port)
 
