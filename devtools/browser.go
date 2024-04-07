@@ -1,6 +1,7 @@
 package devtools
 
 import (
+	"errors"
 	"fmt"
 	"github.com/musiclover789/luna/base_devtools/browser"
 	"github.com/musiclover789/luna/base_devtools/page"
@@ -50,18 +51,21 @@ func initBrowser(chromiumPath string, options *BrowserOptions) (int, *reverse_pr
 	return 0, nil
 }
 
-func NewBrowser(chromiumPath string, options *BrowserOptions) *Browser {
+func NewBrowser(chromiumPath string, options *BrowserOptions) (error, *Browser) {
 	port, proxy := initBrowser(chromiumPath, options)
 	droot := protocol.NewDevtoolsRoot(port)
-	if port == 0 {
-		panic("NewBrowser异常-获取不到正确到端口")
+	if port == 0 || port == -1 {
+		return errors.New("NewBrowser异常-获取不到正确到端口"), nil
 	}
-	_, firstConn := droot.FirstConn()
+	err, firstConn := droot.FirstConn()
+	if err != nil {
+		return errors.New("NewBrowser-FirstConn异常-连接不到端口"), nil
+	}
 	imgPath := ""
 	if options != nil {
 		imgPath = options.ImgPath
 	}
-	return &Browser{
+	return nil, &Browser{
 		ChromiumPath:    chromiumPath,
 		Port:            port,
 		DevtoolsManager: droot,
@@ -98,7 +102,10 @@ func (browser *Browser) RemovePage(p *Page) {
 func (browser *Browser) OpenPage(url string) (error, *Page) {
 	//打开网址、返回页面ID
 	frameId := target.CreateTarget(browser.DevToolsConn, url).Get("result.targetId").String()
-	resultEndpoint := protocol.GetPageEndpointByID(browser.Port, frameId)
+	resultEndpoint, err := protocol.GetPageEndpointByID(browser.Port, frameId)
+	if err != nil {
+		return err, nil
+	}
 	//返回这个page对对象
 	err, pageConn := protocol.CreteDevToolsConn(resultEndpoint.WebSocketDebuggerURL)
 	if err != nil {
@@ -112,7 +119,10 @@ func (browser *Browser) OpenPage(url string) (error, *Page) {
 func (browser *Browser) OpenPageAndListen(url string, fns ...func(devToolsConn *protocol.DevToolsConn)) (error, *Page) {
 	//打开网址、返回页面ID
 	frameId := target.CreateTarget(browser.DevToolsConn, "").Get("result.targetId").String()
-	resultEndpoint := protocol.GetPageEndpointByID(browser.Port, frameId)
+	resultEndpoint, err := protocol.GetPageEndpointByID(browser.Port, frameId)
+	if err != nil {
+		return err, nil
+	}
 	//返回这个page对对象
 	err, pageConn := protocol.CreteDevToolsConn(resultEndpoint.WebSocketDebuggerURL)
 	if err != nil {
@@ -127,7 +137,7 @@ func (browser *Browser) OpenPageAndListen(url string, fns ...func(devToolsConn *
 	return nil, pageObj
 }
 
-func (browser *Browser) GetPages() []*Page {
+func (browser *Browser) GetPages() (error, []*Page) {
 	/***
 	1、循环当前所有有多少页面
 	2、检测当前的浏览器对象里面是否有、如果有就可以叠加、如果没有的可以删除掉、然后返回
@@ -142,7 +152,11 @@ func (browser *Browser) GetPages() []*Page {
 	}
 	browser.Pages = retainedPages
 	//然后我们在同步元素
-	for _, er := range *protocol.GetPageEndpoints(browser.Port) {
+	ers, err := protocol.GetPageEndpoints(browser.Port)
+	if err != nil {
+		return err, nil
+	}
+	for _, er := range *ers {
 		bl := true
 		for _, po := range browser.Pages {
 			//说明这个页面还建在
@@ -163,7 +177,7 @@ func (browser *Browser) GetPages() []*Page {
 			}
 		}
 	}
-	return browser.Pages
+	return nil, browser.Pages
 }
 
 func (browser *Browser) SwitchPage(currentPage *Page) gjson.Result {
