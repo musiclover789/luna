@@ -835,3 +835,20 @@ seletor := "#app > div > div.page-banner > div.page-search > div > div > div.gra
 //第一个参数就是css选择器路径,第二个参数是一个数组 存放自己需要上传的本地图片路径
 p1.UploadFiles(seletor, []string{"/Users/Pictures/IMG_2614.JPG"})
 ```
+
+
+当你准备写多线程调用的时候请注意2点；
+1、请一定注意要设置CachePath；建议直接用我这种方式。
+原理:每次都会在这个/golang/cache文件夹下，创建随机文件夹存储临时文件。
+如果你想直接写死路径，那么请保持变化，如果是多线程，要保证每个线程不同的缓存目录
+```
+_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+		CachePath: luna_utils.CreateCacheDirInSubDir("/golang/cache"),
+		//设置非隐身模式
+		Headless: false,
+	})
+```
+2、请留意，因为忘记关闭浏览器导致的 进程贮存问题。
+可以考虑
+luna_utils.KillProcess()
+当然这个要根据你的需求来处理，如果你正常关闭，不会遇到这个问题。
