@@ -139,7 +139,7 @@ func main() {
     //你浏览器的地址
     //chromiumPath := "/Users/你自己的浏览器的地址/Chromium.app/Contents/MacOS/Chromium"
     chromiumPath := "C:\\src\\chromedev\\chromium\\src\\out\\Default/chrome.exe"
-    browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+    _, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
         // 设置非隐身模式
         Headless: false,
     })
@@ -424,7 +424,7 @@ func TestFingerprint(t *testing.T) {
 
 	//初始化浏览器对象
 	chromiumPath := "你自己的浏览器下载地址"
-	browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+	_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 		//设置缓存目录,
 		CachePath: luna_utils.CreateCacheDirInSubDir("你自己想设置的浏览器缓存数据地址"),
 		//设置你认为需要的指纹信息
