@@ -17,37 +17,52 @@ type EndpointResult struct {
 	ID                   string `json:"id"`
 }
 
-func GetDefaultWebSocketDebuggerUrl(port int) *string {
-	for _, item := range *parseEndpoints(httpEndpoints(port, "/json/version")) {
-		return &item.WebSocketDebuggerURL
+func GetDefaultWebSocketDebuggerUrl(port int) (*string, error) {
+	result, err := httpEndpoints(port, "/json/version")
+	if err != nil {
+		luna_log.LogError("GetDefaultWebSocketDebuggerUrl:", err)
+		return nil, err
 	}
-	return nil
+	for _, item := range *parseEndpoints(result) {
+		return &item.WebSocketDebuggerURL, err
+	}
+	return nil, err
 }
 
-func GetPageEndpoints(port int) *[]EndpointResult {
+func GetPageEndpoints(port int) (*[]EndpointResult, error) {
+	result, err := httpEndpoints(port, "/json/list")
+	if err != nil {
+		luna_log.LogError("GetPageEndpoints:", err)
+		return nil, err
+	}
 	res := make([]EndpointResult, 0)
-	for _, obj := range *parseEndpoints(httpEndpoints(port, "/json/list")) {
+	for _, obj := range *parseEndpoints(result) {
 		if obj.Type == "page" {
 			res = append(res, obj)
 		}
 	}
-	return &res
+	return &res, err
 }
 
-func GetPageEndpointByID(port int, id string) *EndpointResult {
-	for _, obj := range *parseEndpoints(httpEndpoints(port, "/json/list")) {
+func GetPageEndpointByID(port int, id string) (*EndpointResult, error) {
+	result, err := httpEndpoints(port, "/json/list")
+	if err != nil {
+		luna_log.LogError("GetPageEndpointByID:", err)
+		return nil, err
+	}
+	for _, obj := range *parseEndpoints(result) {
 		if obj.ID == id {
-			return &obj
+			return &obj, err
 		}
 	}
-	return nil
+	return nil, err
 }
 
 func ClosePageEndpoint(port int, targetId string) {
 	httpEndpoints(port, "/json/close/"+targetId)
 }
 
-func httpEndpoints(port int, path string) string {
+func httpEndpoints(port int, path string) (string, error) {
 	maxTries := 30
 	tryInterval := time.Second
 	var err error
@@ -72,7 +87,7 @@ func httpEndpoints(port int, path string) string {
 		luna_log.Logf("获取WebSocketDebuggerUrl失败，错误信息:%v", err)
 		luna_log.Logf("Failed to retrieve WebSocketDebuggerUrl. Error message:%v", err)
 	}
-	return result
+	return result, err
 }
 
 func parseEndpoints(jsonStr string) *[]EndpointResult {
