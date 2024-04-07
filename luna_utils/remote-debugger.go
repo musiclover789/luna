@@ -5,6 +5,7 @@ import (
 	"github.com/musiclover789/luna/log"
 	"github.com/musiclover789/luna/reverse_proxy"
 	"log"
+	"math/rand"
 	"net"
 	"net/url"
 	"os"
@@ -12,6 +13,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -102,15 +104,39 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 	return port, proxyServer
 }
 
+var mutex sync.Mutex
 var CreateCacheDirInSubDir = func(basePath string) string {
-	// 组装完整的随机文件夹路径
-	randFolderName := fmt.Sprintf("chromium_user_data_%d", time.Now().UnixNano())
+	rand.Seed(time.Now().UnixNano())
+
+	// 生成随机字母
+	letters := make([]rune, 3)
+	for i := 0; i < 3; i++ {
+		letters[i] = rune('a' + rand.Intn(26))
+	}
+
+	// 获取当前时间戳的中间 9 到 16 位数字
+	timestamp := time.Now().UnixNano()
+	middleDigits := (timestamp / 1e6) % 1e8
+
+	randFolderName := fmt.Sprintf("user_%08d%s", middleDigits, string(letters))
+
+	// 加锁
+	mutex.Lock()
+	defer mutex.Unlock()
+
 	cacheDirFullPath := filepath.Join(basePath, randFolderName)
-	// 创建随机文件夹
-	if err := os.MkdirAll(cacheDirFullPath, 0700); err != nil {
-		fmt.Printf("创建缓存目录失败：", err)
+
+	// 检查文件夹是否已存在
+	if _, err := os.Stat(cacheDirFullPath); err == nil {
+		return cacheDirFullPath
+	}
+
+	if err := os.MkdirAll(cacheDirFullPath, 0777); err != nil {
+		fmt.Printf("创建缓存目录失败: %v\n", err)
 		return ""
 	}
+	time.Sleep(time.Millisecond * 10)
+	fmt.Println("当前缓存目录为:", cacheDirFullPath)
 	return cacheDirFullPath
 }
 
