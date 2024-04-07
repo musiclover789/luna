@@ -851,4 +851,4 @@ _, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 2、请留意，因为忘记关闭浏览器导致的 进程贮存问题。
 可以考虑
 luna_utils.KillProcess()
-当然这个要根据你的需求来处理，如果你正常关闭，不会遇到这个问题。
+当然这个要根据你的需求来处理，如果你正常关闭，不会遇到这个问题,但是大规模并发很难保证，所以还是建议考虑CachePath: luna_utils.CreateCacheDirInSubDir("/golang/cache"),的方式
