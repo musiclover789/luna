@@ -10,7 +10,7 @@ import (
 func TestSimple(t *testing.T) {
 	//初始化浏览器对象
 	chromiumPath := "C:\\src\\chromedev\\chromium\\src\\out\\Default/chrome.exe"
-	browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+	_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 		//设置非隐身模式
 		Headless: false,
 	})
