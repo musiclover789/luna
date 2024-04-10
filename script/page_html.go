@@ -1,5 +1,9 @@
 package script
+
 //document.documentElement.outerHTML;
+/**
+***
+ */
 
 func OuterHTML() string {
 	return `

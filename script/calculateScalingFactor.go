@@ -1,6 +1,7 @@
 package script
 
-/***
+/*
+***
 计算屏幕的缩放因子
 */
 func GetScalingFactor() string {

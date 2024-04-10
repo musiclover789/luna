@@ -1,5 +1,9 @@
 package script
 
+/**
+***
+ */
+
 /***
 
 function moveMouse(startX, startY, endX, endY, duration) {
@@ -239,7 +243,7 @@ const points = [
 
 moveMouse(points, 50, 3000);
 
- */
+*/
 
 /***
 **非常完美的代码
@@ -435,8 +439,7 @@ document.body.appendChild(coordinates);
 
 **/
 
-
-var ShowMousePosition= func() string{
+var ShowMousePosition = func() string {
 	return `
 (function(){ 
 

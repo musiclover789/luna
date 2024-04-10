@@ -1,5 +1,8 @@
 package script
 
+/**
+***
+ */
 func GetElementPositionByCss(selector string) string {
 	//return `
 	//	function getElementPosition(selector) {

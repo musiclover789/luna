@@ -5,88 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20b29590-bbae-49f8-aa7f-f6de66527080" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test_img/dm/buy001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/buy002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/buy002_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/buy002_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/buy003_checkbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/buy003_checkbox_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/buy003_checkbox_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_0001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_0001_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_0001_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_mobile_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_mobile_001_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_mobile_001_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_password_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_password_001_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/dm_password_001_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/login.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/login_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/login_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/submit_order.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/submit_order_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/dm/submit_order_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/1988.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/1988_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/1988_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/1990.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/1990_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/1990_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/sign001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/sign001_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/sign001_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/tanchuang001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/tanchuang001_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/tanchuang001_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/useriphoneoremail001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/useriphoneoremail001_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/useriphoneoremail001_test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/year001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/year001_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_img/ticktook/year001_test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base_devtools/browser/browser.go" beforeDir="false" afterPath="$PROJECT_DIR$/base_devtools/browser/browser.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/browser.go" beforeDir="false" afterPath="$PROJECT_DIR$/devtools/browser.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/mac_arm/img_mac_arm_01" beforeDir="false" afterPath="$PROJECT_DIR$/devtools/luna_lib/mac_arm/img_mac_arm_01" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libgcc_s_seh-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_calib3d455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_core455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_dnn455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_features2d455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_flann455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_gapi455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_highgui455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_imgcodecs455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_imgproc455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_ml455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_objdetect455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_photo455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_stitching455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_video455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libopencv_videoio455.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libstdc++-6.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/libwinpthread-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/opencv_videoio_ffmpeg455_64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/test.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devtools/luna_lib/win_x64/untitled1.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/luna_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/log/luna_log.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/luna_utils/random_utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/luna_utils/random_utils.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/luna_utils/remote-debugger.go" beforeDir="false" afterPath="$PROJECT_DIR$/luna_utils/remote-debugger.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol/devtools_root.go" beforeDir="false" afterPath="$PROJECT_DIR$/protocol/devtools_root.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protocol/http_endpoints.go" beforeDir="false" afterPath="$PROJECT_DIR$/protocol/http_endpoints.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reverse_proxy/reverse_proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/reverse_proxy/reverse_proxy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/t_m/test001.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/t_m/test002.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/t_m/test003.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_img/baidu_img/bottom_big.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_img/baidu_img/bottom_test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_img/baidu_img/button_01.png" beforeDir="false" afterPath="$PROJECT_DIR$/test_img/baidu_img/button_01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_img/baidu_img/button_01_big.png" beforeDir="false" afterPath="$PROJECT_DIR$/test_img/baidu_img/button_01_big.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_img/baidu_img/button_01_test.png" beforeDir="false" afterPath="$PROJECT_DIR$/test_img/baidu_img/button_01_test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_img/baidu_img/home_big.png" beforeDir="false" afterPath="$PROJECT_DIR$/test_img/baidu_img/home_big.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_img/baidu_img/home_test.png" beforeDir="false" afterPath="$PROJECT_DIR$/test_img/baidu_img/home_test.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/calculateScalingFactor.go" beforeDir="false" afterPath="$PROJECT_DIR$/script/calculateScalingFactor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/page_html.go" beforeDir="false" afterPath="$PROJECT_DIR$/script/page_html.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/selector.go" beforeDir="false" afterPath="$PROJECT_DIR$/script/selector.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/show_mouse_position.go" beforeDir="false" afterPath="$PROJECT_DIR$/script/show_mouse_position.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/test_webdriver.go" beforeDir="false" afterPath="$PROJECT_DIR$/script/test_webdriver.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
