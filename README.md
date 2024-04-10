@@ -852,3 +852,13 @@ _, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 可以考虑
 luna_utils.KillProcess()
 当然这个要根据你的需求来处理，如果你正常关闭，不会遇到这个问题,但是大规模并发很难保证，所以还是建议考虑CachePath: luna_utils.CreateCacheDirInSubDir("/golang/cache"),的方式
+
+
+-----2024-4-11
+1、优化了指纹失效问题；
+2、优化了代理速度-微调
+3、增加了browserObj.SetWindowBounds()设置窗口大小和位置问题。
+4、优化了windows系统使用js可能失效问题。
+5、调整了关闭proxy 显示和隐式 方式
+6、调整了 多进程情况下，可能存在的程序意外退出问题。
+
