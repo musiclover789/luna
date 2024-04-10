@@ -63,7 +63,7 @@ func ClosePageEndpoint(port int, targetId string) {
 }
 
 func httpEndpoints(port int, path string) (string, error) {
-	maxTries := 30
+	maxTries := 10
 	tryInterval := time.Second
 	var err error
 	var result string
@@ -77,6 +77,7 @@ func httpEndpoints(port int, path string) (string, error) {
 		}
 		result, err = httpGet(url)
 		if err != nil {
+			//fmt.Println(err, result, ">>>>111jjj")
 			time.Sleep(tryInterval)
 			continue
 		}

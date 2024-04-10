@@ -91,7 +91,7 @@ func (p *ProxyServer) Start() (string, error) {
 	// 创建自定义的 Transport
 	tr := &http.Transport{
 		Dial:                dialFunc,
-		MaxIdleConnsPerHost: 100, // 连接池大小
+		MaxIdleConnsPerHost: 256, // 连接池大小
 	}
 
 	// 设置 ProxyServer 的 Transport

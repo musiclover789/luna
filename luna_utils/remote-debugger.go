@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/musiclover789/luna/log"
 	"github.com/musiclover789/luna/reverse_proxy"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"net"
@@ -11,6 +12,8 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -55,6 +58,32 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 			chromiumCmdArgs = append(chromiumCmdArgs, arg)
 		}
 	}
+	//这里是全部的指纹信息
+	/***
+	根据指纹信息、
+	1、判断chromiumCmdArgs是否有值；
+	2、如果有在次判断是否有指定的盘符;
+	3、拼接数据到字符串,然后写文件到指定到目录。就可以了
+	4、如果超过256个,就删除前面的
+	*/
+
+	switch os_item := runtime.GOOS; os_item {
+	case "windows":
+		fmt.Println("您的操作系统  Windows-设置指纹信息")
+		filePath := "C:\\luna-temp"
+		err = writeFile(filePath, chromiumCmdArgs)
+		if err != nil {
+			fmt.Println("写入指纹信息-错误:", err)
+		}
+		path := filePath
+		//指纹文件超过256个自动删除
+		num := 256
+		err = deleteExcessFiles(path, num)
+		if err != nil {
+			fmt.Println("指纹信息路径错误:", err)
+		}
+	}
+	//----
 
 	chromiumCmdArgs = append(chromiumCmdArgs, "--remote-debugging-port="+strconv.Itoa(port))
 	var proxyServer *reverse_proxy.ProxyServer
@@ -67,6 +96,7 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 		pwd, _ := proxyURL.User.Password()
 
 		// 创建一个代理服务器实例
+		fmt.Println(proxyURL.Scheme, proxyURL.Hostname(), proxyURL.Port(), proxyURL.User.Username(), pwd)
 		proxyServer = reverse_proxy.NewProxyServer(proxyURL.Scheme, proxyURL.Hostname(), proxyURL.Port(), proxyURL.User.Username(), pwd)
 
 		// 启动代理服务器
@@ -170,4 +200,97 @@ func isPortOpen(port int) bool {
 
 var ClearUserDataDir = func(userDataDirFullPath string) error {
 	return os.RemoveAll(userDataDirFullPath)
+}
+
+/****
+
+ */
+
+// 函数1：根据给定的文件路径和字符串数组，将字符串拼接后写入文件
+func writeFile(filePath string, args []string) error {
+	// 检查参数是否为空
+	if len(args) == 0 {
+		return fmt.Errorf("args不能为空")
+	}
+	// 在路径末尾添加斜杠
+	if !strings.HasSuffix(filePath, string(filepath.Separator)) {
+		filePath += string(filepath.Separator)
+	}
+
+	// 检查文件目录是否存在
+	dir := filepath.Dir(filePath)
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		return fmt.Errorf("目录 %s 不存在", dir)
+	}
+
+	// 拼接参数字符串
+	var content string
+	for _, arg := range args {
+		arg = strings.TrimLeft(arg, "-")
+		content += arg + "\n"
+	}
+
+	// 获取当前时间的秒数作为文件名
+	fileName := strconv.FormatInt(time.Now().UnixNano(), 10)
+	fileName = fileName[2 : len(fileName)-3]
+	filePath = filepath.Join(dir, fileName)
+
+	// 写入文件
+	err := ioutil.WriteFile(filePath, []byte(content), 0644)
+	if err != nil {
+		return fmt.Errorf("写入文件失败：%v", err)
+	}
+
+	return nil
+}
+
+// 函数2：根据给定路径判断文件数量是否超过指定数量，并删除多余的文件
+func deleteExcessFiles(path string, num int) error {
+
+	// 在路径末尾添加斜杠
+	if !strings.HasSuffix(path, string(filepath.Separator)) {
+		path += string(filepath.Separator)
+	}
+
+	// 检查文件目录是否存在
+	dir := filepath.Dir(path)
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		return fmt.Errorf("目录 %s 不存在", dir)
+	}
+
+	// 打开目录
+	dirEntries, err := ioutil.ReadDir(path)
+	if err != nil {
+		return fmt.Errorf("打开目录失败：%v", err)
+	}
+
+	// 排除特定文件
+	var files []os.FileInfo
+	for _, entry := range dirEntries {
+		if entry.Name() != "uname.txt" && entry.Name() != "license.txt" {
+			files = append(files, entry)
+		}
+	}
+
+	// 排序文件列表
+	sortFilesByNumber(files)
+
+	// 删除多余文件
+	for i := num; i < len(files); i++ {
+		err := os.Remove(filepath.Join(path, files[i].Name()))
+		if err != nil {
+			return fmt.Errorf("删除文件失败：%v", err)
+		}
+	}
+
+	return nil
+}
+
+// 根据文件名中的数字进行反向排序
+func sortFilesByNumber(files []os.FileInfo) {
+	sort.Slice(files, func(i, j int) bool {
+		numI, _ := strconv.Atoi(strings.TrimSuffix(files[i].Name(), filepath.Ext(files[i].Name())))
+		numJ, _ := strconv.Atoi(strings.TrimSuffix(files[j].Name(), filepath.Ext(files[j].Name())))
+		return numI > numJ // 反向排序
+	})
 }

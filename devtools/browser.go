@@ -34,7 +34,7 @@ type Browser struct {
 	Pages           []*Page
 	ImgPath         string                     //存放目标图片的基础目录
 	Proxy           *reverse_proxy.ProxyServer //proxy对象
-
+	TargetID        string
 }
 
 func initBrowser(chromiumPath string, options *BrowserOptions) (int, *reverse_proxy.ProxyServer) {
@@ -57,7 +57,7 @@ func NewBrowser(chromiumPath string, options *BrowserOptions) (error, *Browser) 
 	if port == 0 || port == -1 {
 		return errors.New("NewBrowser异常-获取不到正确到端口"), nil
 	}
-	err, firstConn := droot.FirstConn()
+	err, firstConn, targetID := droot.FirstConn()
 	if err != nil {
 		return errors.New("NewBrowser-FirstConn异常-连接不到端口"), nil
 	}
@@ -73,6 +73,7 @@ func NewBrowser(chromiumPath string, options *BrowserOptions) (error, *Browser) 
 		DevToolsConn:    firstConn,
 		ImgPath:         imgPath,
 		Proxy:           proxy,
+		TargetID:        targetID,
 	}
 }
 
@@ -204,4 +205,8 @@ func (b *Browser) Close() {
 		}
 	}
 	browser.CloseBrowser(b.DevToolsConn)
+}
+
+func (b *Browser) SetWindowBounds(left, top, width, height int) {
+	browser.SetWindowBounds(b.DevToolsConn, left, top, width, height)
 }
