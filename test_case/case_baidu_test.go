@@ -6,9 +6,9 @@ import (
 	"github.com/musiclover789/luna/base_devtools/page"
 	"github.com/musiclover789/luna/base_devtools/runtime"
 	"github.com/musiclover789/luna/devtools"
-	"luna/luna_utils"
-	"luna/protocol"
-	"luna/script"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
+	"github.com/musiclover789/luna/script"
 	"testing"
 	"time"
 )

@@ -38,7 +38,8 @@ func TestSelector(t *testing.T) {
 	/********************************/
 	fmt.Println("测试一下", err, x, y)
 	p1.SimulateMouseClickOnPage(x, y)
-	for _, pi := range browserObj.GetPages() {
+	_, ps := browserObj.GetPages()
+	for _, pi := range ps {
 		browserObj.SwitchPage(pi)
 		fmt.Println(pi.CurrentURL, pi.Title)
 		fmt.Println(">>>>>>>>>>>>")
