@@ -25,7 +25,7 @@ func Evaluate(conn *protocol.DevToolsConn, expression string) {
 			"disableBreaks":               false,
 			"replMode":                    false,
 			"allowUnsafeEvalBlockedByCSP": true,
-			"serializationOptions":        map[string]interface{}{"serialization": "auto"},
+			"serializationOptions":        map[string]interface{}{"serialization": "json"},
 		},
 	}
 	conn.WriteMessage(req)
@@ -68,7 +68,7 @@ func EvaluateById(conn *protocol.DevToolsConn, expression string, id int) {
 			"disableBreaks":               false,
 			"replMode":                    false,
 			"allowUnsafeEvalBlockedByCSP": true,
-			"serializationOptions":        map[string]interface{}{"serialization": "auto"},
+			"serializationOptions":        map[string]interface{}{"serialization": "json"},
 		},
 	}
 	conn.WriteMessage(req)
