@@ -157,6 +157,25 @@ func (browser *Browser) GetPages() (error, []*Page) {
 	if err != nil {
 		return err, nil
 	}
+	/***
+	ers实际的页面
+	browser.Pages缓存的页面。
+	循环缓存的页面，将实际已经没有的从缓存中去掉
+	*/
+	for _, er := range browser.Pages {
+		bl := true
+		for _, po := range *ers {
+			//说明这个页面还建在
+			if er.PageID == po.ID {
+				bl = false
+			}
+		}
+		//说明缓存总有,但是页面没有
+		if bl {
+			browser.RemovePage(er)
+		}
+	}
+
 	for _, er := range *ers {
 		bl := true
 		for _, po := range browser.Pages {
