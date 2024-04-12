@@ -4,6 +4,8 @@ Luna 是一款强大的第三方库，专为抗指纹自动化爬虫而设计。
 
 作者QQ: 80258153
 
+python版本:https://github.com/musiclover789/luna_python
+
 
 ## 功能亮点
 
