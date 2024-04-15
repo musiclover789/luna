@@ -198,6 +198,7 @@ func (p Page) SimulateScrollToElementBySelector(selector string) error {
 		}
 		value := gjson.Parse(resultStr)
 		positionX := value.Get("elementPosition.x")
+
 		positionY := value.Get("elementPosition.y")
 		viewportPositionTop := value.Get("viewportPosition.top")
 		viewportPositionBottom := value.Get("viewportPosition.bottom")
@@ -516,17 +517,33 @@ func (p Page) GetAllChildElementByCss(selector string) (error, []Node) {
 }
 
 func getRandomPoint(top, left, width, height float64) (float64, float64) {
+	// 将线段平均分为3份，并获取中间段的坐标范围
+	middleSegmentMinX, middleSegmentMaxX := splitSegment(left, left+width, 3)
+	middleSegmentMinY, middleSegmentMaxY := splitSegment(top, top+height, 3)
+
+	// 产生随机数，在中间段的范围内
+	randomX := randomInRange(middleSegmentMinX, middleSegmentMaxX)
+	randomY := randomInRange(middleSegmentMinY, middleSegmentMaxY)
+
+	return randomX, randomY
+}
+
+// 分割线段并返回中间段的坐标范围
+func splitSegment(minX, maxX float64, segments int) (float64, float64) {
+	// 计算每个段的长度
+	segmentLength := (maxX - minX) / float64(segments)
+
+	// 计算中间段的左右坐标
+	middleSegmentMinX := minX + segmentLength
+	middleSegmentMaxX := middleSegmentMinX + segmentLength
+
+	return middleSegmentMinX, middleSegmentMaxX
+}
+
+// 产生随机数，在给定的范围内
+func randomInRange(min, max float64) float64 {
 	rand.Seed(time.Now().UnixNano())
-
-	// 计算矩形框的右下角坐标
-	right := left + width
-	bottom := top + height
-
-	// 生成随机点的 x 和 y 坐标
-	x := rand.Float64()*(right-left) + left
-	y := rand.Float64()*(bottom-top) + top
-
-	return x, y
+	return min + rand.Float64()*(max-min)
 }
 
 func (p Page) GetCurrentURL() (error, string) {
