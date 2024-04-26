@@ -80,6 +80,7 @@ Mac-arm版[114MB]:链接: https://pan.baidu.com/s/1au226sENM5XcoB7SPhEYZA 提取
 
 
 请查阅以下内容，了解老版和新版本框架使用上差异:
+https://github.com/musiclover789/luna-browser/edit/main/README.md
 
 
 
