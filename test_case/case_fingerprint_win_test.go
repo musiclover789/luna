@@ -145,6 +145,13 @@ func TestFingerprintWin(t *testing.T) {
 					这样有什么用呢？
 					1、优点是比较真实、并不会影响任何结果
 					2、缺点是你的取值范围只有[0-9]指纹数量有限、chromium源代码每个版本默认值可能会不太一样.我测试的版本是默认值是:3、我也观察到有些版本默认是4
+				     - 废弃了之前传入canvas的两个参数：
+				  - `--luna_canvas_random_str`
+				  - `--luna_canvas_random_int`
+				- 改为：
+				  - `--luna_canvas_random_int_number=4`
+				  - 类型：整数
+				  - 取值范围：1-999
 		*/
 		"--luna_cavans_random_str=B3B4",
 		//"--luna_cavans_random_int=1", //取值0-9 默认值3
