@@ -80,7 +80,7 @@ Mac-arm版[114MB]:链接: https://pan.baidu.com/s/1au226sENM5XcoB7SPhEYZA 提取
 
 
 请查阅以下内容，了解老版和新版本框架使用上差异:
-https://github.com/musiclover789/luna-browser/edit/main/README.md
+https://github.com/musiclover789/luna-browser
 
 
 
@@ -91,7 +91,7 @@ https://github.com/musiclover789/luna-browser/edit/main/README.md
 |      | 指纹项                      | 技术方案                            |      | win  | mac  |
 | ---- | --------------------------- | ----------------------------------- | ---- | ---- | ---- |
 |      | user_agent指纹              | headless模式下、也会生效            |      |      |      |
-|      | cavnvas指纹                 | 真实指纹库、难以识别                |      |      |      |
+|      | canvas指纹                 | 真实指纹库、难以识别                |      |      |      |
 |      | webgl指纹                   |                                     |      |      |      |
 |      | platform平台                |                                     |      |      |      |
 |      | timezone时区                |                                     |      |      |      |
