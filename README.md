@@ -2,7 +2,7 @@
 
 
 
-​		Luna是专为抗指纹自动化爬虫设计的工具，包含抗指纹浏览器和自动化框架，让您能够自由实现所需功能。
+		Luna是专为抗指纹自动化爬虫设计的工具，包含抗指纹浏览器和自动化框架，让您能够自由实现所需功能。
 
 
 
@@ -48,6 +48,8 @@ https://abrahamjuliot.github.io/creepjs/
 
 1、目前仅支持 Windows x86-64 架构，其他平台测试尚不充分。
 
+2、mac arm版仅提供开发时测试、并不能用于生产环境、因为大部分指纹并不支持。
+
 
 
 ##  Luna文档部分
@@ -67,7 +69,7 @@ https://abrahamjuliot.github.io/creepjs/
 
 老版本-win-[2GB]链接: https://pan.baidu.com/s/14EZw9DvCtO998LOwo_epvA 提取码: mm6s
 
-新版本-win-[670MB]连接: https://pan.baidu.com/s/1kxnZO6BaF6cE3e8Ugrzdog 提取码: tbwg
+新版本-win-[670MB]连接:链接：https://pan.baidu.com/s/1S3ZdbFHTtaZgW2dInc6JDA 提取码：3pmd
 
 Mac-arm版[114MB]:链接: https://pan.baidu.com/s/1au226sENM5XcoB7SPhEYZA 提取码: lbfs
 
@@ -75,11 +77,14 @@ Mac-arm版[114MB]:链接: https://pan.baidu.com/s/1au226sENM5XcoB7SPhEYZA 提取
 
 <win版本-没有授权文件的用户,仅可以测试useragent指纹部分,其他指纹不会生效>
 
+如果不是历史原因、请不要在使用老版本；
+
 如何获取授权文件联系作者获取;
 
 
 
-请查阅以下内容，了解老版和新版本框架使用上差异:
+请查阅以下连接内容，了解老版和新版本框架使用上差异:包括手机版本指纹应该如何设置
+
 https://github.com/musiclover789/luna-browser
 
 
@@ -91,7 +96,7 @@ https://github.com/musiclover789/luna-browser
 |      | 指纹项                      | 技术方案                            |      | win  | mac  |
 | ---- | --------------------------- | ----------------------------------- | ---- | ---- | ---- |
 |      | user_agent指纹              | headless模式下、也会生效            |      |      |      |
-|      | canvas指纹                 | 真实指纹库、难以识别                |      |      |      |
+|      | canvas指纹                  | 真实指纹库、难以识别                |      |      |      |
 |      | webgl指纹                   |                                     |      |      |      |
 |      | platform平台                |                                     |      |      |      |
 |      | timezone时区                |                                     |      |      |      |
@@ -115,8 +120,11 @@ https://github.com/musiclover789/luna-browser
 |      | 是否来自于真实鼠标          | 已处理                              |      |      |      |
 |      | 鼠标移动轨迹                | 已处理                              |      |      |      |
 |      | 其他机器人检测              | 已处理                              |      |      |      |
-|      | webRTC                      | 已处理                              |      |      |      |
+|      | webRTC                      | 可以自行设置出口ip                  |      |      |      |
 |      | screen                      | 已处理                              |      |      |      |
+|      | 声卡指纹                    | 0-1000任意整数                      |      |      |      |
+|      | 屏幕触点数量                | 手机端需要，其他并不需要            |      |      |      |
+|      | 语音合成器                  | 支持自定义                          |      |      |      |
 
 
 
@@ -470,7 +478,7 @@ luna_header_1
 
 3、原理是?
 
-​	修改chromium内核。
+	修改chromium内核。
 
 4、有体积更小的浏览器么？
 
