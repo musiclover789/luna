@@ -124,9 +124,19 @@ Mac-arm版[114MB]:链接: https://pan.baidu.com/s/1au226sENM5XcoB7SPhEYZA 提取
 
 
 
-请查阅以下连接内容，了解老版和新版本框架使用上差异:包括手机版本指纹应该如何设置
+
+
+### 重点请看下面连接
+
+
+
+请查阅以下连接内容，了解老版和新版本框架使用上差异:包括手机版本指纹应该如何设置;
+
+
 
 https://github.com/musiclover789/luna-browser
+
+
 
 
 
