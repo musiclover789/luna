@@ -28,8 +28,8 @@ type DevToolsConn struct {
 
 func CreteDevToolsConn(devtoolsURL string) (error, *DevToolsConn) {
 	dialer := websocket.DefaultDialer
-	dialer.WriteBufferSize = math.MaxInt32 // 设置写入缓冲区大小为 1024 字节
-	//dialer.ReadBufferSize = 512
+	dialer.WriteBufferSize = 2048//math.MaxInt32 // 设置写入缓冲区大小为 1024 字节
+	dialer.ReadBufferSize = 1024
 	conn, _, err := dialer.Dial(devtoolsURL, nil)
 
 	//conn, _, err := websocket.DefaultDialer.Dial(devtoolsURL, nil)
