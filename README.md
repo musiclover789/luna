@@ -67,8 +67,6 @@ https://abrahamjuliot.github.io/creepjs/
 
 目前，我们已经将浏览器文件上传到 百度 网盘，并提供了下载链接：
 
-老版本-win-[2GB]链接: https://pan.baidu.com/s/14EZw9DvCtO998LOwo_epvA 提取码: mm6s
-
 新版本-win-[670MB]连接:链接：https://pan.baidu.com/s/1S3ZdbFHTtaZgW2dInc6JDA 提取码：3pmd
 
 Mac-arm版[114MB]:链接: https://pan.baidu.com/s/1au226sENM5XcoB7SPhEYZA 提取码: lbfs
