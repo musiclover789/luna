@@ -1,5 +1,3 @@
-
-
 # Luna - 基于视觉的抗指纹爬虫第三方库
 
 
@@ -74,15 +72,11 @@ https://abrahamjuliot.github.io/creepjs/
 
 新版本-win-[670MB]连接:链接：https://pan.baidu.com/s/1S3ZdbFHTtaZgW2dInc6JDA 提取码：3pmd
 
-Mac-arm版[114MB]:链接: https://pan.baidu.com/s/1au226sENM5XcoB7SPhEYZA 提取码: lbfs
 
 
+<win版本-没有授权文件的用户,仅可以测试useragent指纹部分,其他指纹不会生效,如何获取授权文件联系作者获取;>
 
-<Mac版本仅供开发测试使用，部分抗指纹功能不可用，方便Mac开发人员进行开发-完全免费-无限制>
 
-<win版本-没有授权文件的用户,仅可以测试useragent指纹部分,其他指纹不会生效>
-
-如何获取授权文件联系作者获取;
 
 
 
@@ -92,36 +86,36 @@ Mac-arm版[114MB]:链接: https://pan.baidu.com/s/1au226sENM5XcoB7SPhEYZA 提取
 
 ### 目前支持指纹项:
 
-|      | 指纹项                      | 技术方案                            |      | win  | mac  |
-| ---- | --------------------------- | ----------------------------------- | ---- | ---- | ---- |
-|      | user_agent指纹              | headless模式下、也会生效            |      |      |      |
-|      | canvas指纹                  | 真实指纹库、难以识别                |      |      |      |
-|      | webgl指纹                   |                                     |      |      |      |
-|      | platform平台                |                                     |      |      |      |
-|      | timezone时区                |                                     |      |      |      |
-|      | timezone_offset时区偏移量   |                                     |      |      |      |
-|      | languages语言               | 无论是国际API、还是navigator 均生效 |      |      |      |
-|      | userAgentData               |                                     |      |      |      |
-|      | header 修改                 | 可以修改http请求协议层header        |      |      |      |
-|      | deviceMemory                |                                     |      |      |      |
-|      | hardwareConcurrency         |                                     |      |      |      |
-|      | UNMASKED_VENDOR_WEBGL       | 显卡                                |      |      |      |
-|      | UNMASKED_RENDERER_WEBGL     | 显卡                                |      |      |      |
-|      | GL_VERSION                  | 显卡                                |      |      |      |
-|      | GL_SupportedExtensions      | 显卡                                |      |      |      |
-|      | GL_VENDOR                   | 显卡                                |      |      |      |
-|      | GL_RENDERER                 | 显卡                                |      |      |      |
-|      | GL_SHADING_LANGUAGE_VERSION | 显卡                                |      |      |      |
-|      | 是否webdriver               | 已处理                              |      |      |      |
-|      | 是否brave                   | 已处理                              |      |      |      |
-|      | 是否selenium                | 已处理                              |      |      |      |
-|      | 是否来自于真实键盘          | 已处理                              |      |      |      |
-|      | 是否来自于真实鼠标          | 已处理                              |      |      |      |
-|      | 鼠标移动轨迹                | 已处理                              |      |      |      |
-|      | 其他机器人检测              | 已处理                              |      |      |      |
-|      | webRTC                      | 可以自行设置出口ip                  |      |      |      |
-|      | screen                      | 已处理                              |      |      |      |
-|      | 声卡指纹                    | 0-1000任意整数                      |      |      |      |
+|      | 指纹项                      |
+| ---- | --------------------------- |
+|      | user_agent指纹              |
+|      | canvas指纹                  |
+|      | webgl指纹                   |
+|      | platform平台                |
+|      | timezone时区                |
+|      | timezone_offset时区偏移量   |
+|      | languages语言               |
+|      | userAgentData               |
+|      | header 修改                 |
+|      | deviceMemory                |
+|      | hardwareConcurrency         |
+|      | UNMASKED_VENDOR_WEBGL       |
+|      | UNMASKED_RENDERER_WEBGL     |
+|      | GL_VERSION                  |
+|      | GL_SupportedExtensions      |
+|      | GL_VENDOR                   |
+|      | GL_RENDERER                 |
+|      | GL_SHADING_LANGUAGE_VERSION |
+|      | 是否webdriver               |
+|      | 是否brave                   |
+|      | 是否selenium                |
+|      | 是否来自于真实键盘          |
+|      | 是否来自于真实鼠标          |
+|      | 鼠标移动轨迹                |
+|      | 其他机器人检测              |
+|      | webRTC                      |
+|      | screen                      |
+|      | 声卡指纹                    |
 
 
 
@@ -173,6 +167,13 @@ func main() {
 | [第四课page对象.md](https://github.com/musiclover789/luna-browser/blob/main/第四课page对象.md) |
 
 
+
+框架相关文档
+
+|                                                              |
+| ------------------------------------------------------------ |
+| [框架文档.md](https://github.com/musiclover789/luna-browser/tree/main/luna%E6%A1%86%E6%9E%B6-golang%E7%89%88) |
+| [如何设置指纹.md](https://github.com/musiclover789/luna-browser/tree/main/%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E6%8C%87%E7%BA%B9) |
 
 完整文档参考:  https://github.com/musiclover789/luna-browser
 
@@ -251,5 +252,3 @@ Luna 考虑到了、可能会协议和浏览器混编的方式、和可能的协
 
 
 **抗指纹部分需要授权 <非付费用户，只能测试useragent 部分效果>** 授权联系-QQ: 80158153
-
-
