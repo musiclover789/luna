@@ -58,7 +58,7 @@ https://abrahamjuliot.github.io/creepjs/
 
 
 
-详细的使用说明和示例代码，请查看本项目的[文档](https://musiclover789.github.io/lunadocs/)。
+详细的使用说明和示例代码，请查看本项目的[文档](https://github.com/musiclover789/luna-browser)。
 
 示例代码部分也可以查看源码的test_case包下内容。
 
@@ -151,7 +151,7 @@ func main() {
         // 设置非隐身模式
         Headless: false,
     })
-    // 打开一个页面  如果你想看更多示例 请参考文档 https://musiclover789.github.io/lunadocs/docs/category/case
+    // 打开一个页面  如果你想看更多示例 请参考文档 https://github.com/musiclover789/luna-browser
     browserObj.OpenPage("https://www.baidu.com")
     fmt.Println("恭喜你，非常nice的第一个案例")
     time.Sleep(1 * time.Hour)
@@ -250,4 +250,5 @@ Luna 考虑到了、可能会协议和浏览器混编的方式、和可能的协
 
 
 **抗指纹部分需要授权 <非付费用户，只能测试useragent 部分效果>** 授权联系-QQ: 80158153
+
 
