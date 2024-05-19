@@ -10,7 +10,7 @@
 
 
 
-python版本框架:https://github.com/musiclover789/luna_python
+python版本框架:准备升级原生态版本；所以暂时删除掉基于golang版本
 
 
 
