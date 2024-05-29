@@ -70,7 +70,7 @@ https://abrahamjuliot.github.io/creepjs/
 
 
 
-新版本-win-[670MB]连接:链接：https://pan.baidu.com/s/1S3ZdbFHTtaZgW2dInc6JDA 提取码：3pmd
+新版本-win-[541MB]连接:链接：链接: https://pan.baidu.com/s/1Cy3g6BcAgzSEFT-ATUtq3g 提取码: 8a9o
 
 
 
