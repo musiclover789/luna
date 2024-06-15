@@ -89,13 +89,17 @@ https://abrahamjuliot.github.io/creepjs/
 
 目前，我们已经将浏览器文件上传到 百度 网盘，并提供了下载链接：
 
+116版本
+
+链接: https://pan.baidu.com/s/1Cy3g6BcAgzSEFT-ATUtq3g 提取码: 8a9o
+
+125版本
+
+链接: https://pan.baidu.com/s/1lS9Ort3rGdrb59kDlNK7mg 提取码: he2u
 
 
-新版本-win-[541MB]连接:链接：链接: https://pan.baidu.com/s/1Cy3g6BcAgzSEFT-ATUtq3g 提取码: 8a9o
 
-
-
-<win版本-没有授权文件的用户,仅可以测试useragent指纹部分,其他指纹不会生效,如何获取授权文件联系作者获取;>
+<没有授权文件的用户,仅可以测试useragent指纹部分,其他指纹不会生效,如何获取授权文件联系作者获取;>
 
 
 
