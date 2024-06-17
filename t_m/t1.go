@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// 指定字体文件夹路径
-	fontsDir := "/Users/hongyuji/Documents/workspace/testFont"
+	fontsDir := "/Users/Documents/workspace/testFont"
 
 	// 读取字体文件夹中的所有文件
 	files, err := ioutil.ReadDir(fontsDir)
