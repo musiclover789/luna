@@ -22,18 +22,18 @@ import (
 
 //--window-size=800,600
 
-var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string, proxy *string, isHeadless bool, size func() (bool, int, int), customArgs ...string) (int, *reverse_proxy.ProxyServer) {
+var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string, proxy *string, isHeadless bool, size func() (bool, int, int), customArgs ...string) (int, *reverse_proxy.ProxyServer, int) {
 	// 获取随机端口
 	port, err := getRandomPort()
 	if err != nil {
 		luna_log.LogError("failed to get random port: %v\n", err)
-		return -1, nil
+		return -1, nil, -1
 	}
 
 	// 检查端口是否被占用
 	if isPortOpen(port) {
 		luna_log.LogError("port %d is already in use\n", port)
-		return -1, nil
+		return -1, nil, -1
 	}
 
 	luna_log.Log("运行可执行文件的路径是:", chromiumPath)
@@ -91,7 +91,7 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 		proxyURL, err := url.Parse(*proxy)
 		if err != nil {
 			luna_log.LogError("Failed to parse proxy URL: %v", err)
-			return -1, nil
+			return -1, nil, -1
 		}
 		pwd, _ := proxyURL.User.Password()
 
@@ -108,7 +108,7 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 
 		if err != nil {
 			luna_log.LogError("Failed to start proxy server: %v", err)
-			return -1, nil
+			return -1, nil, -1
 		}
 		chromiumCmdArgs = append(chromiumCmdArgs, "--proxy-server=127.0.0.1:"+proxy_port)
 	}
@@ -123,15 +123,15 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 	err = chromiumCmd.Start()
 	if err != nil {
 		luna_log.LogError("Failed to start process: %v\n", err)
-		return -1, nil
+		return -1, nil, -1
 	}
-
 	if chromiumCmd.ProcessState != nil && chromiumCmd.ProcessState.Exited() {
 		luna_log.LogError("Failed to start process, exit code %d\n", chromiumCmd.ProcessState.ExitCode())
-		return -1, nil
+		return -1, nil, -1
 	}
-
-	return port, proxyServer
+	pid := chromiumCmd.Process.Pid
+	fmt.Println("Browser process PID:", pid)
+	return port, proxyServer, pid
 }
 
 var mutex sync.Mutex

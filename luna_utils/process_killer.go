@@ -27,6 +27,14 @@ var KillProcess = func() {
 	}
 }
 
+func KillProcessByPid(pid int) {
+	if runtime.GOOS == "windows" {
+		exec.Command("taskkill", "/F", "/PID", strconv.Itoa(pid)).Run()
+	} else {
+		exec.Command("kill", strconv.Itoa(pid)).Run()
+	}
+}
+
 var killProcess_Mac = func() {
 	// 查找特定的进程名称
 	psCommand := "ps aux | grep Chromium | grep -v grep | awk '{print $2}'"

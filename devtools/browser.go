@@ -35,9 +35,10 @@ type Browser struct {
 	ImgPath        string                     //存放目标图片的基础目录
 	Proxy          *reverse_proxy.ProxyServer //proxy对象
 	TargetID       string
+	Pid            int
 }
 
-func initBrowser(chromiumPath string, options *BrowserOptions) (int, *reverse_proxy.ProxyServer) {
+func initBrowser(chromiumPath string, options *BrowserOptions) (int, *reverse_proxy.ProxyServer, int) {
 	if options != nil {
 		return luna_utils.StartChromiumWithUserDataDir(chromiumPath, options.CachePath, &options.ProxyStr, options.Headless, func() (bool, int, int) {
 			if options.WindowSize == nil {
@@ -48,11 +49,11 @@ func initBrowser(chromiumPath string, options *BrowserOptions) (int, *reverse_pr
 	} else {
 		return luna_utils.StartChromiumWithUserDataDir(chromiumPath, "", nil, false, nil)
 	}
-	return 0, nil
+	return 0, nil, -1
 }
 
 func NewBrowser(chromiumPath string, options *BrowserOptions) (error, *Browser) {
-	port, proxy := initBrowser(chromiumPath, options)
+	port, proxy, pid := initBrowser(chromiumPath, options)
 	droot := protocol.NewDevtoolsRoot(port)
 	if port == 0 || port == -1 {
 		return errors.New("NewBrowser异常-获取不到正确到端口"), nil
@@ -74,6 +75,7 @@ func NewBrowser(chromiumPath string, options *BrowserOptions) (error, *Browser) 
 		ImgPath:        imgPath,
 		Proxy:          proxy,
 		TargetID:       targetID,
+		Pid:            pid,
 	}
 }
 

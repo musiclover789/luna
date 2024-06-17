@@ -16,7 +16,7 @@ email:80258153@qq.com
 
 - luna是一个自动化框架，类似Selenium Pyppeteer Playwright。满足专业的自动化测试需求。
 
-  
+
 
 
 
@@ -44,7 +44,7 @@ email:80258153@qq.com
 
 - 数据包采集等
 
-  
+
 
 ## 效果演示
 
@@ -110,6 +110,7 @@ https://abrahamjuliot.github.io/creepjs/
 
 
 **注意**：您必须需要下载和使用luna浏览器，才能使在框架中设置的指纹生效。
+如果你即便知道可以修改，但是不知道改成什么样子的指纹，建议直接咨询作者本人。
 
 
 
