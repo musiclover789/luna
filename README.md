@@ -11,6 +11,8 @@
 email:80258153@qq.com
 
 
+python 版-https://github.com/musiclover789/luna_python
+
 
 ## Luna 是什么？
 
