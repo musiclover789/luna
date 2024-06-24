@@ -57,6 +57,8 @@ python 版-https://github.com/musiclover789/luna_python
 
 ## 抗指纹效果演示
 
+你不但可以模拟pc、还可以模拟手机。
+
 ![效果展示-加载可能有些慢](https://i.ibb.co/nftHyHW/511714127971-pic.jpg)
 
 ![效果展示-加载可能有些慢](https://i.ibb.co/hCXrxn2/BEE68478001-EBDF49-A93-FA7-CBC7-C60-FD.png)
@@ -64,7 +66,7 @@ python 版-https://github.com/musiclover789/luna_python
 
 经过大量测试，目前基本可以过掉主流抗指纹识别;
 
-你不但可以模拟pc、还可以模拟手机。
+
 
 ```
 https://www.browserscan.net/
