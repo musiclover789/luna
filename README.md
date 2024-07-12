@@ -126,7 +126,7 @@ https://abrahamjuliot.github.io/creepjs/
 | ---- | -------------------------------------------------------- |
 |      | user_agent指纹                                           |
 |      | canvas指纹                                               |
-|      | webgl指纹                                                |
+|      | webgl指纹\webgpu                                                |
 |      | platform平台                                             |
 |      | timezone时区                                             |
 |      | timezone_offset时区偏移量                                |
