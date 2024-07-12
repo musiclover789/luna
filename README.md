@@ -6,9 +6,7 @@
 
 
 
-作者QQ: 80258153
 
-email:80258153@qq.com
 
 
 python 版-https://github.com/musiclover789/luna_python
@@ -112,6 +110,9 @@ https://bot.sannysoft.com/
 
 <没有授权文件的用户,仅可以测试useragent指纹部分,其他指纹不会生效,付费获取授权文件，联系作者获取>
 
+作者QQ: 80258153
+
+email:80258153@qq.com
 
 <仅框架部分是免费、开源的，浏览器部分不开源也不免费，如果您介意收费，请使用其他项目>
 
