@@ -52,7 +52,12 @@ func initBrowser(chromiumPath string, options *BrowserOptions) (int, *reverse_pr
 	return 0, nil, -1
 }
 
+var mutex sync.Mutex
+
 func NewBrowser(chromiumPath string, options *BrowserOptions) (error, *Browser) {
+	// 加锁
+	mutex.Lock()
+	defer mutex.Unlock()
 	port, proxy, pid := initBrowser(chromiumPath, options)
 	droot := protocol.NewDevtoolsRoot(port)
 	if port == 0 || port == -1 {

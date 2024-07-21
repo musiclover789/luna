@@ -52,12 +52,12 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 			chromiumCmdArgs = append(chromiumCmdArgs, strings.Join([]string{"--window-size=", strconv.Itoa(Width), ",", strconv.Itoa(Height)}, ""))
 		}
 	}
-
-	for _, arg := range customArgs {
-		if len(arg) > 0 {
-			chromiumCmdArgs = append(chromiumCmdArgs, arg)
-		}
-	}
+	//这部分因为升级、所以废弃，不再生效
+	//for _, arg := range customArgs {
+	//	if len(arg) > 0 {
+	//		chromiumCmdArgs = append(chromiumCmdArgs, arg)
+	//	}
+	//}
 	//这里是全部的指纹信息
 	/***
 	根据指纹信息、
@@ -71,7 +71,7 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 	case "windows":
 		fmt.Println("您的操作系统  Windows-设置指纹信息")
 		filePath := "C:\\luna-temp"
-		err = writeFile(filePath, chromiumCmdArgs)
+		err = writeFile(filePath, chromiumCmdArgs, strconv.Itoa(port))
 		if err != nil {
 			fmt.Println("写入指纹信息-错误:", err)
 		}
@@ -136,6 +136,9 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 
 var mutex sync.Mutex
 var CreateCacheDirInSubDir = func(basePath string) string {
+	// 加锁
+	mutex.Lock()
+	defer mutex.Unlock()
 	rand.Seed(time.Now().UnixNano())
 
 	// 生成随机字母
@@ -149,10 +152,6 @@ var CreateCacheDirInSubDir = func(basePath string) string {
 	middleDigits := (timestamp / 1e6) % 1e8
 
 	randFolderName := fmt.Sprintf("user_%08d%s", middleDigits, string(letters))
-
-	// 加锁
-	mutex.Lock()
-	defer mutex.Unlock()
 
 	cacheDirFullPath := filepath.Join(basePath, randFolderName)
 
@@ -207,7 +206,7 @@ var ClearUserDataDir = func(userDataDirFullPath string) error {
  */
 
 // 函数1：根据给定的文件路径和字符串数组，将字符串拼接后写入文件
-func writeFile(filePath string, args []string) error {
+func writeFile(filePath string, args []string, name string) error {
 	// 检查参数是否为空
 	if len(args) == 0 {
 		return fmt.Errorf("args不能为空")
@@ -218,9 +217,19 @@ func writeFile(filePath string, args []string) error {
 	}
 
 	// 检查文件目录是否存在
-	dir := filepath.Dir(filePath)
-	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		return fmt.Errorf("目录 %s 不存在", dir)
+	//dir := filepath.Dir(filePath)
+	//if _, err := os.Stat(dir); os.IsNotExist(err) {
+	//	return fmt.Errorf("目录 %s 不存在", dir)
+	//}
+	// 检查目录是否存在
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		// 目录不存在，创建目录
+		err := os.MkdirAll(filePath, 0755) // 0755 表示权限，具体权限可以根据需要调整
+		if err != nil {
+			fmt.Println("创建目录失败:", err)
+		} else {
+			fmt.Println("目录创建成功:", filePath)
+		}
 	}
 
 	// 拼接参数字符串
@@ -231,12 +240,17 @@ func writeFile(filePath string, args []string) error {
 	}
 
 	// 获取当前时间的秒数作为文件名
-	fileName := strconv.FormatInt(time.Now().UnixNano(), 10)
-	fileName = fileName[2 : len(fileName)-3]
-	filePath = filepath.Join(dir, fileName)
+	//fileName := strconv.FormatInt(time.Now().UnixNano(), 10)
+	//fileName = fileName[2 : len(fileName)-3]
+	filePath = filepath.Join(filePath, name)
+
+	err := os.Remove(filePath)
+	if err != nil {
+		fmt.Println("删除文件失败:", err)
+	}
 
 	// 写入文件
-	err := ioutil.WriteFile(filePath, []byte(content), 0644)
+	err = ioutil.WriteFile(filePath, []byte(content), 0644)
 	if err != nil {
 		return fmt.Errorf("写入文件失败：%v", err)
 	}

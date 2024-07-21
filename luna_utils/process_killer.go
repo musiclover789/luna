@@ -27,12 +27,48 @@ var KillProcess = func() {
 	}
 }
 
+// CheckProcessRunning 检查指定PID的进程是否还在运行。
+// 如果进程还在运行，返回false；如果进程已终止或不存在，返回true。
+func CheckProcessRunning(pid int) bool {
+	var checkCmd *exec.Cmd
+	if runtime.GOOS == "windows" {
+		checkCmd = exec.Command("tasklist", "/FI", "PID eq "+strconv.Itoa(pid))
+	} else {
+		checkCmd = exec.Command("ps", "-p", strconv.Itoa(pid))
+	}
+
+	output, err := checkCmd.CombinedOutput()
+	if err != nil {
+		return false // 命令执行失败，假设进程不存在
+	}
+
+	if runtime.GOOS == "windows" {
+		// Windows下检查tasklist命令的输出
+		outputStr := string(output)
+		if strings.Contains(outputStr, "No tasks are running") {
+			return false // 未找到该PID对应的进程
+		}
+	} else {
+		// Unix/Linux下检查ps命令的输出
+		outputStr := string(output)
+
+		lines := strings.Split(outputStr, "\n")
+		// 第二行是ps命令的输出，如果长度为1，表示没有找到进程
+		if len(lines) == 1 {
+			return false // 没有找到该PID对应的进程
+		}
+	}
+
+	return true // 进程存在
+}
+
 func KillProcessByPid(pid int) {
 	if runtime.GOOS == "windows" {
 		exec.Command("taskkill", "/F", "/PID", strconv.Itoa(pid)).Run()
 	} else {
 		exec.Command("kill", strconv.Itoa(pid)).Run()
 	}
+
 }
 
 var killProcess_Mac = func() {
