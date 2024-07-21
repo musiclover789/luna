@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/musiclover789/luna/base_devtools/emulation"
 	"github.com/musiclover789/luna/base_devtools/page"
 	"github.com/musiclover789/luna/devtools"
 	"github.com/musiclover789/luna/luna_utils"
 	"github.com/musiclover789/luna/protocol"
-	"os"
+	"strconv"
+	"sync"
 	"time"
 )
 
@@ -19,43 +19,37 @@ https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-navigate
 func main() {
 	luna_utils.KillProcess()
 	/********************************/
-	chromiumPath := "/Users/Documents/workspace/ios/chromedev/chromium/src/out/Default-test/Chromium.app/Contents/MacOS/Chromium"
-	_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
-		ProxyStr:    "",
-		CachePath:   "",
-		Fingerprint: []string{},
-		Headless:    false,
-		WindowSize: &devtools.WindowSize{
-			Width:  1496,
-			Height: 967,
-		},
-	})
+	for i := 0; i < 100; i++ {
+		time.Sleep(2 * time.Second)
+		go func() {
+			chromiumPath := "/Users/hongyuji/Documents/workspace/ios/chromedev/chromium/src/out/Default-test/Chromium.app/Contents/MacOS/Chromium"
+			_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+				CachePath: luna_utils.CreateCacheDirInSubDir("/Users/hongyuji/Documents/workspace/golang/cache"),
 
-	//&{2 1496 967 1496 858}
-	browserObj.Session.ShowLog(true)
+				Fingerprint: []string{
+					"--luna_webrtc_public_ip=10.29.120." + strconv.Itoa(i),
+				},
+				Headless: false,
+				WindowSize: &devtools.WindowSize{
+					Width:  1496,
+					Height: 967,
+				},
+			})
 
-	_, p1 := browserObj.OpenPageAndListen("https://www.baidu.com", func(session *protocol.Session) {
+			var wg sync.WaitGroup
+			wg.Add(1)
+			browserObj.OpenPageAndListen("https://abrahamjuliot.github.io/creepjs/", func(devToolsConn *protocol.Session) {
+				devToolsConn.ShowLog(false)
+				page.PageEnable(devToolsConn)
+				devToolsConn.SubscribeOneTimeEvent("Page.loadEventFired", func(param interface{}) {
+					fmt.Println("load ok")
+					wg.Done()
+				})
+			})
+			wg.Wait()
+			browserObj.OpenPage("https://www.browserscan.net/")
+			time.Sleep(time.Hour)
+		}()
+	}
 
-	})
-	browserObj.Close()
-	time.Sleep(time.Second * 3)
-	luna_utils.KillProcessByPid(browserObj.Pid)
-	os.Exit(0)
-	time.Sleep(1000000)
-	emulation.SetTouchEmulationEnabled(p1.Session, 5)
-	p1.SetMaxTouchPoints(5)
-	page.PageEnable(p1.Session)
-	p1.Session.SubscribeOneTimeEvent("Page.loadEventFired", func(param interface{}) {
-		//页面加载完成
-		fmt.Println("页面打开")
-	})
-	time.Sleep(50 * time.Second)
-	_, x, y := p1.GetElementPositionByXpathOnPage("//*[@id=\"kw\"]")
-	p1.SimulateMouseClickOnPage(x, y)
-	p1.SimulateKeyboardInputOnPage("1k张来24")
-	//模拟回车键
-	p1.SimulateEnterKey()
-	//模拟退格键
-	p1.SimulateBackspaceKey()
-	browserObj.Close()
 }
