@@ -24,7 +24,7 @@ func main() {
 		go func() {
 			chromiumPath := "/Users/Documents/workspace/ios/chromedev/chromium/src/out/Default-test/Chromium.app/Contents/MacOS/Chromium"
 			_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
-				CachePath: luna_utils.CreateCacheDirInSubDir("/Users/hongyuji/Documents/workspace/golang/cache"),
+				CachePath: luna_utils.CreateCacheDirInSubDir("/Users/Documents/workspace/golang/cache"),
 
 				Fingerprint: []string{
 					"--luna_webrtc_public_ip=101.29.120." + strconv.Itoa(i),
