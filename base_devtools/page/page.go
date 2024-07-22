@@ -120,7 +120,7 @@ func PageCaptureScreenshotSync(conn *protocol.Session, timeout time.Duration) ([
 		"params": map[string]interface{}{
 			"format":      "jpeg",
 			"quality":     30,
-			"fromSurface": false,
+			"fromSurface": true,
 		},
 	}
 	resultChan := make(chan []byte, 1)
