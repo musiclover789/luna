@@ -22,12 +22,12 @@ func main() {
 	for i := 0; i < 100; i++ {
 		time.Sleep(2 * time.Second)
 		go func() {
-			chromiumPath := "/Users/hongyuji/Documents/workspace/ios/chromedev/chromium/src/out/Default-test/Chromium.app/Contents/MacOS/Chromium"
+			chromiumPath := "/Users/Documents/workspace/ios/chromedev/chromium/src/out/Default-test/Chromium.app/Contents/MacOS/Chromium"
 			_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
 				CachePath: luna_utils.CreateCacheDirInSubDir("/Users/hongyuji/Documents/workspace/golang/cache"),
 
 				Fingerprint: []string{
-					"--luna_webrtc_public_ip=10.29.120." + strconv.Itoa(i),
+					"--luna_webrtc_public_ip=101.29.120." + strconv.Itoa(i),
 				},
 				Headless: false,
 				WindowSize: &devtools.WindowSize{
