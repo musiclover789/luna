@@ -11,6 +11,7 @@ import (
 	"github.com/musiclover789/luna/reverse_proxy"
 	"github.com/tidwall/gjson"
 	"sync"
+	"time"
 )
 
 type BrowserOptions struct {
@@ -231,6 +232,7 @@ func (b *Browser) Close() {
 		}
 	}
 	browser.CloseBrowser(b.Session)
+	time.Sleep(5 * time.Second)
 }
 
 func (b *Browser) SetWindowBounds(left, top, width, height int) {
