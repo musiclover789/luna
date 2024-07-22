@@ -52,13 +52,14 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 			chromiumCmdArgs = append(chromiumCmdArgs, strings.Join([]string{"--window-size=", strconv.Itoa(Width), ",", strconv.Itoa(Height)}, ""))
 		}
 	}
-	//这部分因为升级、所以废弃，不再生效
-	//for _, arg := range customArgs {
-	//	if len(arg) > 0 {
-	//		chromiumCmdArgs = append(chromiumCmdArgs, arg)
-	//	}
-	//}
 	//这里是全部的指纹信息
+	fingerprintArgs := []string{}
+	for _, arg := range customArgs {
+		if len(arg) > 0 {
+			fingerprintArgs = append(fingerprintArgs, arg)
+		}
+	}
+
 	/***
 	根据指纹信息、
 	1、判断chromiumCmdArgs是否有值；
@@ -71,7 +72,7 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 	case "windows":
 		fmt.Println("您的操作系统  Windows-设置指纹信息")
 		filePath := "C:\\luna-temp"
-		err = writeFile(filePath, chromiumCmdArgs, strconv.Itoa(port))
+		err = writeFile(filePath, fingerprintArgs, strconv.Itoa(port))
 		if err != nil {
 			fmt.Println("写入指纹信息-错误:", err)
 		}
