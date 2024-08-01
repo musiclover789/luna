@@ -20,7 +20,7 @@ golang版 [完整文档](https://github.com/musiclover789/luna-browser/tree/main
 
 - luna是一个自动化框架，类似Selenium Pyppeteer Playwright。满足专业的自动化测试需求。
 - luna浏览器、支持浏览器指纹、防关联相关功能的浏览器。
-- luna浏览器、支持第三方框架、如playwright等、
+- luna浏览器、支持第三方框架、如[playwright示例](https://github.com/musiclover789/luna-browser/blob/main/python-playwright%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8luna%E6%B5%8F%E8%A7%88%E5%99%A8.md)、[puppeteer示例](https://github.com/musiclover789/luna-browser/blob/main/puppeteer-%E7%A4%BA%E4%BE%8B.md)
 
 
 
