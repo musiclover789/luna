@@ -57,6 +57,9 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 	for _, arg := range customArgs {
 		if len(arg) > 0 {
 			fingerprintArgs = append(fingerprintArgs, arg)
+			if !strings.Contains(arg, "luna") {
+				chromiumCmdArgs = append(chromiumCmdArgs, arg)
+			}
 		}
 	}
 
@@ -84,7 +87,7 @@ var StartChromiumWithUserDataDir = func(chromiumPath, userDataDirFullPath string
 			fmt.Println("指纹信息路径错误:", err)
 		}
 	}
-	//----
+	//------remote-debugging-port=12345
 
 	chromiumCmdArgs = append(chromiumCmdArgs, "--remote-debugging-port="+strconv.Itoa(port))
 	var proxyServer *reverse_proxy.ProxyServer
@@ -247,7 +250,7 @@ func writeFile(filePath string, args []string, name string) error {
 
 	err := os.Remove(filePath)
 	if err != nil {
-		fmt.Println("删除文件失败:", err)
+		fmt.Println("删除文件失败-或不存在端口占用文件-忽略:", err)
 	}
 
 	// 写入文件
