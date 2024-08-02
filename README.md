@@ -68,6 +68,9 @@ golang版 [完整文档](https://github.com/musiclover789/luna-browser/tree/main
 
 ![效果展示-加载可能有些慢](https://i.ibb.co/N2hf9dp/71329-AB4-B4-A5-DA9751-E8625-ADF243-DBA.png)
 
+![效果展示-加载可能有些慢](https://i.ibb.co/fSv7Sgm/a27362b341921ee132e8288ac02ad662.png)
+
+![效果展示-加载可能有些慢](https://i.ibb.co/4tcKfpj/c222812d446c480c910333cd01edfd20.png)
 
 
 经过大量测试，目前基本可以过掉主流抗指纹识别,提供一些指纹检测网址、仅供参考;
