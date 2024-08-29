@@ -117,9 +117,9 @@ https://bot.sannysoft.com/
 
 链接: https://pan.baidu.com/s/11I3BlmSuNJgHxaQmZzWf5Q 提取码: e4uh
 
-最后更新时间2024-8-28版
+最后更新时间2024-8-28版【此版本除了、显卡、字体、cavans、rects、webrtc以外，其他所有指纹均不需要授权即可使用】
 
-链接: https://pan.baidu.com/s/1828qQRiXu1MMQoZLwUdmNQ 提取码: 5wek 
+链接: https://pan.baidu.com/s/1DwyjUAeaQvNNNNDQfYNLbw 提取码: 4ids 
 
 
 
