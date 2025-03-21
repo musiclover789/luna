@@ -109,29 +109,13 @@ https://bot.sannysoft.com/
 
 目前，我们已经将浏览器文件上传到 百度 网盘，并提供了下载链接：
 
-最后更新时间2024-7-31版
-
-
-
-
-
-链接: https://pan.baidu.com/s/11I3BlmSuNJgHxaQmZzWf5Q 提取码: e4uh
-
-最后更新时间2024-9-12【此版本除了、显卡、字体、cavans、rects、webrtc以外，其他所有指纹均不需要授权即可使用】
 
 链接: https://pan.baidu.com/s/1ZyNdwfiJolx3RdTcxtg8yQ 提取码: n5yj 
-
-
-
 
 
 作者QQ: 80258153
 
 email:80258153@qq.com
-
-
-
-
 
 
 
@@ -559,16 +543,6 @@ func main() {
 4、**我用了这个框架就可以换指纹吗？**
 
 ​	您需要下载并使用luna浏览器，结合框架才可以，单独的框架是不能达到效果的。
-
-
-
-5、**为什么我测试browserscan时候并不是100%**
-
-​     说明你设置的指纹有问题，或者您根本就不是授权用户，指纹设置不生效。
-
-6、**是否支持frame**
-
-​     暂不支持、
 
 
 
