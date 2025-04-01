@@ -239,7 +239,9 @@ func writeFile(filePath string, args []string, name string) error {
 	// 拼接参数字符串
 	var content string
 	for _, arg := range args {
-		arg = strings.TrimLeft(arg, "-")
+	    if strings.Contains(arg, "luna") {
+            	    arg = strings.TrimLeft(arg, "-")
+            }
 		content += arg + "\n"
 	}
 
