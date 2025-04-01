@@ -17,6 +17,8 @@ python 版-https://github.com/musiclover789/luna_python
 
 golang版 [完整文档](https://github.com/musiclover789/luna-browser/tree/main/%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E6%8C%87%E7%BA%B9)
 
+qq群:179991677
+
 ## Luna 是什么？
 
 - luna是一个自动化框架，类似Selenium Pyppeteer Playwright。满足专业的自动化测试需求。
