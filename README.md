@@ -112,7 +112,7 @@ https://bot.sannysoft.com/
 目前，我们已经将浏览器文件上传到 百度 网盘，并提供了下载链接：
 
 
-链接: https://pan.baidu.com/s/1ZyNdwfiJolx3RdTcxtg8yQ 提取码: n5yj 
+链接: https://pan.baidu.com/s/1XdfU_hSxIiBk8U7fdKxA_g 提取码: 29ad
 
 
 作者QQ: 80258153
