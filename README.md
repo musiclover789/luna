@@ -484,7 +484,247 @@ func main() {
 
 ```
 
+**模拟手机的示例-实际情况请根据自己的参数自己设置**
 
+
+```
+package main
+
+import (
+	"fmt"
+	"github.com/musiclover789/luna/base_devtools/page"
+	"github.com/musiclover789/luna/devtools"
+	fingerprint "github.com/musiclover789/luna/fingerprints_db/fingerprints"
+	"github.com/musiclover789/luna/luna_utils"
+	"github.com/musiclover789/luna/protocol"
+	"strconv"
+	"sync"
+	"time"
+)
+
+/*
+示例-手机的示例
+*/
+func main() {
+	
+	proxyIP := "54.169.160.108"
+	ipstr := "socks5://username:password@" + proxyIP + ":12418"
+	num := 7
+	timezone, _, err := fingerprint.GetTimezone(proxyIP)
+	offset, err := fingerprint.GetTimeZoneOffset(timezone)
+	offset = offset * 3600 * 1000
+	if err != nil {
+		fmt.Println("没有成功获取到内容  Error:", err) // 输出错误信息
+		return
+	}
+	var arr = []string{}
+	userAgent := "Mozilla/5.0 (Linux; Android 12; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.252 Mobile Safari/537.36"
+	fullVersion := "124.0.6367.252"
+	majorVersion := "124"
+	arr = append(arr, "--luna_user_agent="+userAgent)
+	arr = append(arr, "--luna_header_set=true")
+	arr = append(arr, "--luna_header_1=User-Agent-lunareplace-"+userAgent)
+	arr = append(arr, "--luna_header_2=Accept-Language-lunareplace-"+fingerprint.MapTimezoneToLanguage(timezone))
+	//meta-data
+	arr = append(arr, `--luna_header_3=sec-ch-ua-full-version-lunareplace-"`+fullVersion+`"`)
+	arr = append(arr, `--luna_header_5=Sec-Ch-Ua-lunareplace-"Chromium";v="`+majorVersion+`", "Google Chrome";v="`+majorVersion+`", "Not-A.Brand";v="99`)
+	arr = append(arr, `--luna_header_8=Sec-Ch-Ua-Full-Version-List-lunareplace-"Chromium";v="`+fullVersion+`", "Google Chrome";v="`+fullVersion+`", "Not-A.Brand";v="99.0.0.0"`)
+
+	arr = append(arr, `--luna_header_9=luna-lunaadd-"`+fullVersion+`"`)
+	//userAgentData := fingerprint.GenerateUserAgentData(majorVersion, fullVersion)
+	//arr = append(arr, userAgentData)
+	userAgentData := fmt.Sprintf("--luna_userAgentData=Chromium:%s-luna-Google Chrome:%s-luna-Not-A.Brand:24-luna-platform:Android-luna-mobile:true-luna-platform_version:12-luna-ua_full_version:%s-luna-model:Samsung Galaxy-luna-architecture:arm64",
+		majorVersion, majorVersion, fullVersion)
+	arr = append(arr, userAgentData)
+
+	arr = append(arr, "--luna_platform=Linux armv8l") //---------
+	//time zone
+	fmt.Println(timezone)
+
+	arr = append(arr, "--luna_timezone="+timezone)
+	arr = append(arr, "--luna_timezone_offset="+strconv.Itoa(offset))
+
+	arr = append(arr, "--luna_languages="+fingerprint.MapTimezoneToLanguage(timezone))
+	arr = append(arr, "--luna_language="+fingerprint.MapTimezoneToLanguage(timezone))
+	arr = append(arr, "--luna_deviceMemory=8")
+	arr = append(arr, "--luna_hardwareConcurrency=8")
+	arr = append(arr, "--luna_cavans_random_int_number="+strconv.Itoa(num))    //+
+	arr = append(arr, "--luna_audio_random_int_number="+strconv.Itoa(num))     //+
+	arr = append(arr, "--luna_client_rects_int_number="+strconv.Itoa(num*num)) //+
+
+	//webrtc
+	//建议不设置IP6公网IP，而是将自己的网络禁用IP6 原因是即便设置了，他依然可以通过你设置的IP6找到你的地区、可能会造成其他指纹并不一致
+	//arr = append(arr, "--luna_webrtc_public_ip6="+"2409:8a5e:aa9f:8a4:1869:e970:2645:a62b")
+	arr = append(arr, "--luna_webrtc_public_ip="+proxyIP)
+	arr = append(arr, "--luna_webrtc_local_ip6_ip="+fingerprint.GenerateRandomIPv6())
+
+	//fonts //这里不做设置,意义不大
+	//arr = append(arr, `--luna_font_white_list=Tahoma,Arial,Helvetica,arial,Arial Black,Arial Narrow,Bahnschrift,Bahnschrift Light,Bahnschrift SemiBold,Calibri,Calibri Light,Cambria,Cambria Math,Candara,Candara Light,Comic Sans MS,Consolas,Constantia,Corbel,Corbel Light,Courier,Courier New,Ebrima,Gadugi,Leelawadee UI,Segoe UI Emoji,Segoe UI Historic,Franklin Gothic Heavy,Franklin Gothic Medium,Gabriola,Georgia,Ink Free,Javanese Text,Lucida Console,Lucida Sans Unicode,MS Gothic,MS PGothic,MS UI Gothic,MS Sans Serif,Microsoft Sans Serif,MS Serif,Times,Times New Roman,MV Boli,Malgun Gothic,Marlett,Microsoft Himalaya,Microsoft JhengHei,Microsoft JhengHei Regular,Microsoft JhengHei Light,Microsoft JhengHei UI,Microsoft JhengHei UI Regular,Microsoft JhengHei UI Light,Microsoft New Tai Lue,Microsoft PhagsPa,Microsoft Tai Le,Microsoft YaHei Light,Microsoft YaHei UI,Microsoft YaHei UI Light,Microsoft Yi Baiti,SimSun-ExtB,MingLiU-ExtB,MingLiU_HKSCS-ExtB,Mongolian Baiti,Myanmar Text,Nirmala UI,PMingLiU-ExtB,Palatino Linotype,Segoe MDL2 Assets,Segoe Print,Segoe Script,Segoe UI Black,Segoe UI Light,Segoe UI Semibold,Segoe UI Symbol,Sitka Banner,Sitka Display,Sitka Heading,Sitka Small,Sitka Subheading,Sitka Text,Sylfaen,Symbol,Trebuchet MS,Verdana,Webdings,Wingdings,Yu Gothic,Yu Gothic Regular,Yu Gothic Light,Yu Gothic Medium,Yu Gothic UI,Yu Gothic UI Regular,Yu Gothic UI Light,Yu Gothic UI Semibold,Franklin Gothic,PMingLiU,Impact,Microsoft YaHei,SimSun,Gulim,MingLiU,MingLiU_HKSCS,Gabriola Regular,Impact Regular,Javanese Text Regular,Lucida Console Regular,Lucida Sans Unicode Regular,Microsoft Himalaya Regular,Microsoft Sans Serif Regular,Microsoft Yi Baiti Regular,MingLiU_HKSCS-ExtB Regular,MingLiu-ExtB Regular,MS Gothic Regular,MS PGothic Regular,MS UI Gothic Regular,MV Boli Regular,NSimSun Regular,PMingLiU-ExtB Regular,Segoe MDL2 Assets Regular,Segoe UI Emoji Regular,Segoe UI Historic Regular,Segoe UI Symbol Regular,SimSun Regular,SimSun-ExtB Regular,Sylfaen Regular,Symbol Regular,Webdings Regular,Wingdings Regular,NSimSun,system-uiLeelawadee,Old English Text MT,Imprint MT Shadow,Californian FB,Gill Sans MT Condensed,Wingdings 2,Juice ITC,SimHei,Engravers MT,Rockwell Condensed,Matura MT Script Capitals,Lucida Sans,Playbill,Castellar,Tw Cen MT Condensed,Lucida Sans Typewriter,Monotype Corsiva,Harrington,High Tower Text,Baskerville Old Face,Jokerman,Mistral,Wingdings 3,Goudy Stout,Cooper Black,Berlin Sans FB,Blackadder ITC,Wide Latin,Papyrus Condensed,Elephant,Papyrus,DejaVu Sans Mono,Stencil,Rockwell,Footlight MT Light,Goudy Old Style,Algerian,Edwardian Script ITC,Broadway,Brush Script MT,Poor Richard,Bell MT,MS Reference Specialty,FangSong,Agency FB,Calisto MT,Lucida Calligraphy,Tw Cen MT,Bernard MT Condensed,Informal Roman,Parchment,PMingLiU,Copperplate Gothic,STFangsong,Showcard Gothic,Century Gothic,Felix Titling,DengXian Light,Perpetua,Lucida Bright,Colonna MT,Ravie,HoloLens MDL2 Assets,Maiandra GD,Chiller,Vivaldi,Perpetua Titling MT,Niagara Solid,HoloLens MDL2 Assets Regular,STKaiti`)
+
+	//也不做设置，
+	//screen, devicePixelRatio := GetScreen()
+	//arr = append(arr, "--luna_screen="+screen)
+	//arr = append(arr, "--luna_devicePixelRatio="+devicePixelRatio)
+
+	//webgl-显卡
+	arr = append(arr, "--touch-events")
+	arr = append(arr, "--luna_screen=height:803,width:360,availHeight:803,availWidth:360,availLeft:0,availTop:0,colorDepth:24,pixelDepth:24")
+
+	arr = append(arr, "--luna_deviceWidth=360")
+	arr = append(arr, "--luna_deviceHeight=803")
+
+	arr = append(arr, "--luna_visualViewportWidth=360")
+	arr = append(arr, "--luna_visualViewportHeight=803")
+
+	arr = append(arr, "--luna_outerWidth=360")
+	arr = append(arr, "--luna_outerHeight=803")
+	arr = append(arr, "--luna_innerWidth=360")
+	arr = append(arr, "--luna_innerHeight=803")
+
+	arr = append(arr, "--luna_devicePixelRatio=3")
+	arr = append(arr, "--luna_font_white_list=Arial,Tahoma,Sans,freeserif,SimSun,sans-serif,cursive,Times,Roboto,Roman,serif")
+
+	//---------
+	arr = append(arr, "--ignore-gpu-blocklist")
+	arr = append(arr, "--enable-unsafe-webgpu")
+	arr = append(arr, "--enable-webgpu-developer-features")
+
+	// WebGL 硬件标识参数
+	arr = append(arr, "--luna_UNMASKED_VENDOR_WEBGL=Qualcomm")
+	arr = append(arr, "--luna_UNMASKED_RENDERER_WEBGL=Adreno 740")
+	arr = append(arr, "--luna_GL_VERSION=WebGL 2.0 (OpenGL ES 3.2 V@0501.0)")
+
+	// WebGL 扩展支持列表（基于 Adreno 典型支持）
+	arr = append(arr, `--luna_GL_SupportedExtensions=[
+    "ANGLE_instanced_arrays",
+    "EXT_blend_minmax",
+    "EXT_color_buffer_half_float",
+    "EXT_disjoint_timer_query_webgl",
+    "EXT_float_blend",
+    "EXT_texture_filter_anisotropic",
+    "KHR_parallel_shader_compile",
+    "OES_texture_float_linear",
+    "WEBGL_compressed_texture_etc",
+    "WEBGL_compressed_texture_astc",
+    "WEBGL_debug_renderer_info",
+    "WEBGL_lose_context"
+]`)
+
+	// OpenGL 驱动信息
+	arr = append(arr, "--luna_GL_VENDOR=Qualcomm")
+	arr = append(arr, "--luna_GL_RENDERER=Adreno 740")
+	arr = append(arr, "--luna_GL_SHADING_LANGUAGE_VERSION=WebGL GLSL ES 3.20 (OpenGL ES GLSL ES 3.20 Qualcomm)")
+
+	// GPU 元数据（以骁龙 8 Gen 2 为例）
+	arr = append(arr, "--luna_vendor=qualcomm")     // 芯片供应商
+	arr = append(arr, "--luna_architecture=adreno") // GPU 架构
+	arr = append(arr, "--luna_description=Adreno 740 GPU @ 680MHz")
+	arr = append(arr, "--luna_device=SM8550")   // 芯片型号
+	arr = append(arr, "--luna_driver=V@0501.0") // 典型驱动版本
+
+	arr = append(arr, "--luna_maxTouchPoints=5")
+
+	for _, item := range arr {
+		fmt.Println(item)
+		fmt.Println()
+	}
+	fmt.Println("========================================")
+	luna_utils.KillProcess()
+	/***
+	所有测试示例 均依托已下几个前提
+	1、基于代理IP状态下测试 如http://uname:password@111.1.40.111:3128
+	*/
+	/********************************/
+
+	chromiumPath := "C:\\workspace\\chrome\\chrome\\src\\out\\Default\\chrome.exe"
+	_, browserObj := devtools.NewBrowser(chromiumPath, &devtools.BrowserOptions{
+		CachePath:   luna_utils.CreateCacheDirInSubDir("C:\\workspace\\luna\\luna_new\\luna_new_case\\cache\\"),
+		Fingerprint: arr,
+		Headless:    false,
+		ProxyStr: ipstr,
+		WindowSize: &devtools.WindowSize{
+			Width:  306,
+			Height: 803,
+		},
+	})
+        fmt.Println("这里设置了代理，也就是ProxyStr，你可能无法打开网页，你测试的时候需要去掉这个选项，或者换成能用的代理")
+	//===================
+
+	var wg sync.WaitGroup
+	wg.Add(1)
+	wg.Add(1)
+	//触摸点 5
+	//--https://www.browserscan.net/zh
+	//--https://abrahamjuliot.github.io/creepjs/
+	//emulation.SetTouchEmulationEnabled(browserObj.Session, 5)
+	//---http://www.ryohan.top/?post=2
+	browserObj.OpenPage("https://www.browserscan.net/zh")
+	time.Sleep(10 * time.Hour)
+	//err, pObj := browserObj.OpenPageAndListen("https://www.browserscan.net/zh", func(devToolsConn *protocol.Session) {
+	err, pObj := browserObj.OpenPageAndListen("http://www.ryohan.top", func(devToolsConn *protocol.Session) {
+		devToolsConn.ShowLog(false)
+		//runtime.Evaluate(devToolsConn, ``)
+		page.PageEnable(devToolsConn)
+		devToolsConn.SubscribeOneTimeEvent("Page.loadEventFired", func(param interface{}) {
+			fmt.Println("load ok")
+			wg.Done()
+		})
+	})
+	fmt.Println(pObj)
+
+	//触摸点 5
+	//emulation.SetTouchEmulationEnabled(pObj.Session, 5)
+	//pObj.SetMaxTouchPoints(5)
+	time.Sleep(8 * time.Second)
+	start_x := luna_utils.RandomFloat(10, 300)
+	start_y := luna_utils.RandomFloat(10, 800)
+	end_x := luna_utils.RandomFloat(10, 300)
+	end_y := start_y + luna_utils.RandomFloat(30, 800)
+	for i := 0; i < 1; i++ {
+		fmt.Println("是否操作了？")
+		pObj.TouchDrag(start_x, start_y, end_x, end_y)
+		time.Sleep(1 * time.Second)
+		start_x = luna_utils.RandomFloat(10, 300)
+		start_y = luna_utils.RandomFloat(600, 800)
+		end_x = luna_utils.RandomFloat(10, 300)
+		end_y = luna_utils.RandomFloat(10, 400)
+	}
+	time.Sleep(time.Second)
+	for i := 0; i < 1; i++ {
+		fmt.Println("是否操作了？")
+		pObj.TouchDrag(start_x, start_y, end_x, end_y)
+
+		start_x = luna_utils.RandomFloat(10, 300)
+		start_y = luna_utils.RandomFloat(10, 400)
+		end_x = luna_utils.RandomFloat(10, 300)
+		end_y = luna_utils.RandomFloat(600, 800)
+		//time.Sleep(2 * time.Second)
+	}
+	fmt.Println("================是否点击了")
+	pObj.Touch(luna_utils.RandomFloat(10, 300), luna_utils.RandomFloat(10, 100))
+
+	fmt.Println("================是否点击了")
+	pObj.Touch(luna_utils.RandomFloat(10, 300), luna_utils.RandomFloat(1, 50))
+	time.Sleep(5 * time.Second)
+	fmt.Println("====是否跳转到新的页面，然后往下滑了")
+	for i := 0; i < 200; i++ {
+		fmt.Println("是否操作了？")
+		pObj.TouchDrag(start_x, start_y, end_x, end_y)
+		//time.Sleep(1 * time.Second)
+		start_x = luna_utils.RandomFloat(10, 300)
+		start_y = luna_utils.RandomFloat(600, 800)
+		end_x = luna_utils.RandomFloat(10, 300)
+		end_y = luna_utils.RandomFloat(10, 300)
+		time.Sleep(time.Second * 2)
+		fmt.Println("为什么感觉并没有往下滑动呢？什么原因")
+	}
+
+	wg.Wait()
+	time.Sleep(time.Hour)
+
+}
+
+```
 
 ##### 相关教程：
 
