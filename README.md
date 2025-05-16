@@ -152,7 +152,7 @@ https://github.com/musiclover789/fingerprints_db/tree/main
 |      | GL_VENDOR                                                |
 |      | GL_RENDERER                                              |
 |      | GL_SHADING_LANGUAGE_VERSION                              |
-|      | 是否webdriver                                            |
+|      | 是否webdriver\无限debugger问题                                            |
 |      | 是否brave                                                |
 |      | 是否selenium                                             |
 |      | 是否来自于真实键盘                                       |
