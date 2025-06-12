@@ -19,6 +19,8 @@ golang版 [完整文档](https://github.com/musiclover789/luna-browser/tree/main
 
 qq群:179991677
 
+需要授权文件，请联系群主。
+
 ## Luna 是什么？
 
 - luna是一个自动化框架，类似Selenium Pyppeteer Playwright。满足专业的自动化测试需求。
