@@ -180,6 +180,8 @@ https://github.com/musiclover789/fingerprints_db/tree/main
 
 ## 快速入门
 
+基于golang版本go version go1.22.4 开发
+
 引入包:     go get -u github.com/musiclover789/luna
 
 ###### 如果您执行到这一步遇到依赖包问题，那么请执行 go get -v -d ./... 命令即可。
