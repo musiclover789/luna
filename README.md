@@ -19,7 +19,7 @@ golang版 [完整文档](https://github.com/musiclover789/luna-browser/tree/main
 
 qq群:179991677
 
-需要授权文件，请联系群主。
+
 
 ## Luna 是什么？
 
