@@ -121,6 +121,8 @@ https://bot.sannysoft.com/
 
 email:80258153@qq.com
 
+### 非授权用户部分重要指纹不生效
+
 
 
 ## 目前支持指纹项：
