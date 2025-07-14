@@ -113,7 +113,7 @@ https://bot.sannysoft.com/
 
 目前，我们已经将浏览器文件上传到 百度 网盘，并提供了下载链接：
 
-
+# 非授权用户部分重要指纹不生效
 链接: https://pan.baidu.com/s/1XdfU_hSxIiBk8U7fdKxA_g 提取码: 29ad
 
 
@@ -121,7 +121,7 @@ https://bot.sannysoft.com/
 
 email:80258153@qq.com
 
-### 非授权用户部分重要指纹不生效
+
 
 
 
