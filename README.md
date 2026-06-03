@@ -49,6 +49,30 @@ qq群:179991677
 
 - http、https、socks5、百名单、或者用户名密码方式代理IP 所有格式、所有类型均支持。
 
+
+✨━━━━━━━━━━━━━━━━━━━━━✨
+<div align=left>
+<a href="https://www.ipwo.net/?ref=githubaerjie" target="_blank">
+	<img width="70%"  alt="20260603165908_24_23" src="https://github.com/user-attachments/assets/f71a58bc-a34d-47f1-a730-8a560bf3e9b1" />
+</a>
+</div>
+
+
+### 使用 IPWO 住宅代理提升爬虫成功率，学习者务必遵守法律！
+#### 官网地址
+#### 👉 [**访问IPWO官网**](https://www.ipwo.net/?ref=githubaerjie)
+
+#### 产品简介：
+- 支持 HTTP/HTTPS/SOCKS5 全协议
+- 动态 / 静态代理全覆盖，满足不同场景
+- 流量永不过期，按量计费无最低消费
+- 8000万 + 全球真实家庭宽带 IP，支持国家 / 城市 / ISP 三级精准定位
+- 无数据中心 IP 混掺，黑名单率 <3%。完美兼容 Luna 的代理配置和多浏览器环境。
+- 有效绕过 Cloudflare、Akamai 等主流反爬系统。
+- 访问IPWO入口，免费流量测试，动态住宅IP流量不过期，静态住宅IP低至9.9····
+
+✨━━━━━━━━━━━━━━━━━━━━━✨
+
 - 执行js
 
 - cookie
